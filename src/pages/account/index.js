@@ -63,10 +63,10 @@ const Welcome = () => {
 
   return (
     <AccountLayout>
-      <Meta title="Nextacular - Dashboard" />
+      <Meta title="Unlimited Now - Dashboard" />
       <Content.Title
-        title="Nextacular Dashboard"
-        subtitle="Start building SaaS platforms in a day"
+        title="Unlimited Now Dashboard"
+        subtitle="Start building your site in seconds"
       />
       <Content.Divider />
       <Content.Container>

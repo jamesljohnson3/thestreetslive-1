@@ -88,7 +88,7 @@ const Domain = ({ isTeamOwner, workspace }) => {
 
   return (
     <AccountLayout>
-      <Meta title={`Nextacular - ${workspace.name} | Domains`} />
+      <Meta title={`Unlimited Now - ${workspace.name} | Domains`} />
       <Content.Title
         title="Subdomain Management"
         subtitle="Manage your subdomain"
@@ -166,7 +166,7 @@ const Domain = ({ isTeamOwner, workspace }) => {
               ))
             ) : (
               <Content.Empty>
-                Once you&apos;ve added your domain on Nextacular, that domain
+                Once you&apos;ve added your domain on Unlimited Now, that domain
                 will show up here
               </Content.Empty>
             )}

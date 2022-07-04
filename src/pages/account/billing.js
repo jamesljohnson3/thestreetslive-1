@@ -40,7 +40,7 @@ const Billing = ({ invoices, products }) => {
 
   return (
     <AccountLayout>
-      <Meta title="Nextacular - Billing" />
+      <Meta title="Unlimited Now - Billing" />
       <Content.Title
         title="Billing"
         subtitle="Manage your billing and preferences"
@@ -152,7 +152,7 @@ const Billing = ({ invoices, products }) => {
         </Content.Container>
       ) : (
         <Content.Empty>
-          Once you&apos;ve paid for something on Nextacular, invoices will show
+          Once you&apos;ve paid for something on Unlimited Now, invoices will show
           up here
         </Content.Empty>
       )}
