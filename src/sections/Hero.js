@@ -14,7 +14,7 @@ const Hero = () => {
       <div className="relative flex flex-col px-10 mx-auto space-y-5 md:w-3/4">
         <header className="flex items-center justify-between space-x-3">
           <Link href="/">
-            <a className="text-2xl font-bold">Nextacular</a>
+            <a className="text-2xl font-bold">Unlimited Now</a>
           </Link>
           <button className="md:hidden" onClick={toggleMenu}>
             {!showMenu ? (
@@ -51,8 +51,8 @@ const Hero = () => {
         </header>
         <div className="flex flex-col items-center justify-center pt-10 mx-auto md:w-3/5">
           <h1 className="text-6xl font-extrabold text-center">
-            <span className="block">Build SaaS platforms</span>
-            <span className="block text-blue-600">like never before</span>
+            <span className="block">My Unlimited </span>
+            <span className="block text-blue-600">Now Site</span>
           </h1>
           <p className="mt-5 text-center text-gray-600">
             Quickly build landing pages that will help you get results fast
