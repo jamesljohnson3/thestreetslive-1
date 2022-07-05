@@ -49,7 +49,7 @@ export default NextAuth({
         const { host } = new URL(url);
         await sendMail({
           html: html({ email, url }),
-          subject: `[Nextacular] Sign in to ${host}`,
+          subject: `[Unlimited Now] Sign in to ${host}`,
           text: text({ email, url }),
           to: email,
         });
