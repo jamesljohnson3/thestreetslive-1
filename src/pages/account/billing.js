@@ -53,7 +53,7 @@ const Billing = ({ invoices, products }) => {
             subtitle="You are currently under the&nbsp; FREE plan"
           >
             <p className="p-3 text-sm border rounded">
-              Personal accounts cannot be upgraded and will remain free forever.
+              Community membership cannot be upgraded and will remain free forever.
               In order to use the platform for professional purposes or work
               with a team, get started by creating a team or contacting sales.
             </p>

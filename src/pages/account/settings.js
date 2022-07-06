@@ -166,7 +166,7 @@ const Settings = ({ user }) => {
         </Card>
         <Card>
           <Card.Body
-            title="Personal Account ID"
+            title="Personal access token"
             subtitle="Used when interacting with APIs"
           >
             <div className="flex items-center justify-between px-3 py-2 space-x-5 font-mono text-sm border rounded md:w-1/2">
@@ -180,7 +180,7 @@ const Settings = ({ user }) => {
         <Card danger>
           <Card.Body
             title="Danger Zone"
-            subtitle="Permanently remove your Personal Account and all of its contents
+            subtitle="Permanently remove your website and all of its contents
               from Unlimited Now platform"
           />
           <Card.Footer>
@@ -191,16 +191,16 @@ const Settings = ({ user }) => {
               className="text-white bg-red-600 hover:bg-red-500"
               onClick={toggleModal}
             >
-              Deactivate Personal Account
+              Deactivate Website
             </Button>
           </Card.Footer>
           <Modal
             show={showModal}
-            title="Deactivate Personal Account"
+            title="Deactivate Website"
             toggle={toggleModal}
           >
             <p>
-              Your account will be deleted, along with all of its Workspace
+              Your website will be deleted, along with all of its Workspace
               contents.
             </p>
             <p className="px-3 py-2 text-red-600 border border-red-600 rounded">
@@ -225,7 +225,7 @@ const Settings = ({ user }) => {
                 disabled={!verifiedEmail || isSubmitting}
                 onClick={deactivateAccount}
               >
-                <span>Deactivate Personal Account</span>
+                <span>Deactivate Website</span>
               </Button>
             </div>
           </Modal>
