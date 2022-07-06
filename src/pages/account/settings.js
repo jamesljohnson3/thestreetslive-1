@@ -166,7 +166,7 @@ const Settings = ({ user }) => {
         </Card>
         <Card>
           <Card.Body
-            title="Personal access token"
+            title="Access token"
             subtitle="Used when interacting with APIs"
           >
             <div className="flex items-center justify-between px-3 py-2 space-x-5 font-mono text-sm border rounded md:w-1/2">
