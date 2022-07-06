@@ -32,7 +32,7 @@ const Pricing = () => {
             <div className="flex flex-col w-full h-full p-10 space-y-5 bg-gray-100 border-t">
               <a
                 className="px-10 py-3 text-lg text-center text-blue-600 bg-white rounded shadow hover:bg-blue-50"
-                href="#!"
+                href="https://unlimitednow.com/pricing"
               >
                 Choose Commmunity
               </a>
@@ -72,7 +72,7 @@ const Pricing = () => {
             <div className="flex flex-col w-full h-full p-10 space-y-5 bg-gray-100 border-t">
               <a
                 className="px-10 py-3 text-lg text-center text-blue-600 bg-white rounded shadow hover:bg-blue-50"
-                href="#!"
+                href="https://unlimitednow.com/pricelist"
               >
                 Choose Pro
               </a>
