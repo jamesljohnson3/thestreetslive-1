@@ -34,7 +34,7 @@ const Pricing = () => {
                 className="px-10 py-3 text-lg text-center text-blue-600 bg-white rounded shadow hover:bg-blue-50"
                 href="#!"
               >
-                Get Commmunity
+                Choose Commmunity
               </a>
               <div className="space-y-5">
                 <h6 className="uppercase">What&apos;s Included</h6>
@@ -74,7 +74,7 @@ const Pricing = () => {
                 className="px-10 py-3 text-lg text-center text-blue-600 bg-white rounded shadow hover:bg-blue-50"
                 href="#!"
               >
-                Get Started with Pro
+                Choose Pro
               </a>
               <div className="space-y-5">
                 <h6 className="uppercase">What&apos;s Included</h6>
