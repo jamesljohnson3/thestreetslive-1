@@ -51,7 +51,7 @@ const Hero = () => {
         </header>
         <div className="flex flex-col items-center justify-center pt-10 mx-auto md:w-3/5">
           <h1 className="text-6xl font-extrabold text-center">
-            <span className="block">My Site </span>
+            <span className="block">My Site 👩🏽‍💻</span>
             <span className="block text-blue-600">Unlimited Now</span>
           </h1>
           <p className="mt-5 text-center text-gray-600">
