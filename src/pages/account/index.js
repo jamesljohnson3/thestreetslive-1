@@ -65,8 +65,8 @@ const Welcome = () => {
     <AccountLayout>
       <Meta title="Unlimited Now - Dashboard" />
       <Content.Title
-        title="Unlimited Now Dashboard"
-        subtitle="Start building your site in seconds"
+        title="Dashboard"
+        subtitle="Start building your site now."
       />
       <Content.Divider />
       <Content.Container>
