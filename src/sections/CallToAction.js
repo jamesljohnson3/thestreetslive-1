@@ -1,32 +1,20 @@
-import { builder, BuilderComponent } from '@builder.io/react'
+const CallToAction = () => {
+  return (
+    <div className="flex items-center justify-center w-full h-screen bg-blue-600">
+      <div className="relative flex flex-col px-5 mx-auto space-y-5 md:w-3/4">
+        <div className="flex flex-col space-y-3 text-white">
+          <h2 className="text-4xl font-extrabold text-center md:text-6xl">
+            <span className="block">Join our community</span>
+          </h2>
+          <h2 className="text-2xl font-bold text-center md:text-4xl">
+            <span className="block">Create your account today</span>
+          </h2>
+        </div>
+        <div className="flex items-center justify-center">
+                 </div>
+      </div>
+    </div>
+  );
+};
 
-builder.init('fc8480a6998e49d7af4ee889483a2619')
-
-export const getStaticProps = async (context) => {
-  const content = await builder.get('page', { url: context.resolvedUrl }).promise();
-
-  return { 
-    props: { content }, 
-    revalidate: true,
-    notFound: !content
-  }
-}
-
-const MyComponent = (props) => (
-  <BuilderComponent
-    content={props.content}
-    model="page" />
-)
-
-export default MyComponent;
-
-// Register your components for use in the visual editor!
-// https://www.builder.io/blog/drag-drop-react
-const Heading = props => (
-  <h1 className="my-heading">{props.title}</h1>
-)
-
-Builder.registerComponent(Heading, { 
-  name: 'Heading',
-  inputs: [{ name: 'title', type: 'text' }]
-})
+export default CallToAction;
