@@ -64,7 +64,7 @@ const Login = () => {
           <h2 className="text-gray-600">
           </h2><a
                 className="px-10 py-3 text-lg text-center text-blue-600 bg-white rounded shadow hover:bg-blue-50"
-                href="https://dashboard.unlimitpotential.com/login"
+                href="https://login.unlimitednow.site/login"
               >
                 Request Early Access
               </a>
