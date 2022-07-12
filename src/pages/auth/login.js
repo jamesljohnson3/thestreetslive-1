@@ -57,21 +57,24 @@ const Login = () => {
       <div className="flex flex-col items-center justify-center p-5 m-auto space-y-5 rounded shadow-lg md:p-10 md:w-1/3">
         <div>
           <Link href="/">
-            <a className="text-4xl font-bold">Unlimited Now</a>
+            <a className="text-4xl font-bold">Sign in with SSO</a>
           </Link>
         </div>
         <div className="text-center">
-          <h1 className="text-2xl font-bold">Sign in with your email</h1>
           <h2 className="text-gray-600">
-            We&apos;ll send a magic link to your inbox to confirm your email
-            address and sign you in.
-          </h2>
+          </h2><a
+                className="px-10 py-3 text-lg text-center text-blue-600 bg-white rounded shadow hover:bg-blue-50"
+                href="https://dashboard.unlimitpotential.com/login"
+              >
+                Request Early Access
+              </a>
+
         </div>
         <form className="flex flex-col w-full space-y-3">
           <input
             className="px-3 py-2 border rounded"
             onChange={handleEmailChange}
-            placeholder="user@email.com"
+            placeholder="user@unlimitpotential.com"
             type="email"
             value={email}
           />
@@ -84,7 +87,7 @@ const Login = () => {
               ? 'Checking session...'
               : isSubmitting
               ? 'Sending the link...'
-              : 'Send the Magic Link'}
+              : 'Login'}
           </button>
         </form>
         {socialProviders.length > 0 && (

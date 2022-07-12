@@ -32,9 +32,9 @@ const Hero = () => {
             ].join(' ')}
           >
             <nav className="flex flex-col w-full space-x-0 space-y-3 text-center md:space-y-0 md:space-x-3 md:flex-row">
-              <a className="px-5 py-2 rounded hover:bg-gray-100">Guides</a>
-              <a className="px-5 py-2 rounded hover:bg-gray-100">Pricing</a>
-              <a className="px-5 py-2 rounded hover:bg-gray-100">Blog</a>
+              <a className="px-5 py-2 rounded hover:bg-gray-100"  href="https://unlimitpotential.com/pricelist" >Guides</a>
+              <a className="px-5 py-2 rounded hover:bg-gray-100"  href="https://unlimitpotential.com/pricelist">Pricing</a>
+              <a className="px-5 py-2 rounded hover:bg-gray-100"  href="https://unlimitpotential.com/pricelist">Blog</a>
             </nav>
             <Link
               href={
