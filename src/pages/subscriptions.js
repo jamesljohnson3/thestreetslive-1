@@ -32,7 +32,7 @@ const Pricing = () => {
             <div className="flex flex-col w-full h-full p-10 space-y-5 bg-gray-100 border-t">
               <a
                 className="px-10 py-3 text-lg text-center text-blue-600 bg-white rounded shadow hover:bg-blue-50"
-                href="https://dashboard.unlimitpotential.com/signin"
+                href="https://manage.unlimitednow.site/signin"
               >
                 Downgrade plan
               </a>
@@ -72,7 +72,7 @@ const Pricing = () => {
             <div className="flex flex-col w-full h-full p-10 space-y-5 bg-gray-100 border-t">
               <a
                 className="px-10 py-3 text-lg text-center text-blue-600 bg-white rounded shadow hover:bg-blue-50"
-                href="https://dashboard.unlimitpotential.com/signin"
+                href="https://manage.unlimitednow.site/signin"
               >
                Upgrade to pro
               </a>
