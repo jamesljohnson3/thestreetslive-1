@@ -32,9 +32,9 @@ const Hero = () => {
             ].join(' ')}
           >
             <nav className="flex flex-col w-full space-x-0 space-y-3 text-center md:space-y-0 md:space-x-3 md:flex-row">
-              <a className="px-5 py-2 rounded hover:bg-gray-100"  href="https://unlimitpotential.com/pricelist" >Guides</a>
-              <a className="px-5 py-2 rounded hover:bg-gray-100"  href="https://unlimitpotential.com/pricelist">Pricing</a>
-              <a className="px-5 py-2 rounded hover:bg-gray-100"  href="https://unlimitpotential.com/pricelist">Blog</a>
+              <a className="px-5 py-2 rounded hover:bg-gray-100"  href="https://dashboard.unlimitpotential.com/" >Integrations</a>
+              <a className="px-5 py-2 rounded hover:bg-gray-100"  href="https://dashboard.unlimitpotential.com/">Pricing</a>
+              <a className="px-5 py-2 rounded hover:bg-gray-100"  href="https://dashboard.unlimitpotential.com/">Partner</a>
             </nav>
             <Link
               href={
@@ -59,10 +59,10 @@ const Hero = () => {
           </p>
         </div>
         <div className="flex items-center justify-center space-x-5">
-          <a className="px-10 py-3 text-center text-white bg-blue-600 rounded shadow hover:bg-blue-500">
+          <a className="px-10 py-3 text-center text-white bg-blue-600 rounded shadow hover:bg-blue-500 " href="https://dashboard.unlimitpotential.com/">
             Get Started
           </a>
-          <a className="px-10 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50">
+          <a className="px-10 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://dashboard.unlimitpotential.com/">
             Live Demo
           </a>
         </div>
