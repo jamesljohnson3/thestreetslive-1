@@ -74,7 +74,7 @@ const Pricing = () => {
                 className="px-10 py-3 text-lg text-center text-blue-600 bg-white rounded shadow hover:bg-blue-50"
                 href="https://dashboard.unlimitpotential.com/signin"
               >
-                Go Pro
+               Upgrade to pro
               </a>
               <div className="space-y-5">
                 <h6 className="uppercase">What&apos;s Included</h6>
