@@ -8,7 +8,7 @@ const sidebarMenu = () => [
       },
       {
         name: 'Billing',
-        path: `/account/billing`,
+        path: `subscriptions`,
       },
       {
         name: 'Settings',
