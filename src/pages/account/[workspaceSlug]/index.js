@@ -19,7 +19,7 @@ const Workspace = () => {
         <Content.Container />
        
       <div className="div">
-          <a className="px-10 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://unlimitednow.site/account/unlimitednow/settings/domain">
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://unlimitednow.site/account/unlimitednow/settings/domain">
           <div className="div-2">
             <picture>
               <source
@@ -40,7 +40,7 @@ const Workspace = () => {
             <p>Start an Online Business</p>
           </div>
         </a>
-        <a href="https://shop.unlimitpotential.com/" className="a-2">
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://shop.unlimitpotential.com/">
           <div className="div-4">
             <picture>
               <source
@@ -61,7 +61,7 @@ const Workspace = () => {
             <p>Create an Online Store</p>
           </div>
         </a>
-        <a href="https://unlimitednow.me" className="a-3">
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="http://unlimitednow.me/">
           <div className="div-6">
             <picture>
               <source
@@ -82,7 +82,7 @@ const Workspace = () => {
             <p>Create an Ad for Social Media</p>
           </div>
         </a>
-        <a href="https://unlimitednow.me/explore" className="a-4">
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="http://unlimitednow.me/explore">
           <div className="div-8">
             <picture>
               <source
@@ -103,7 +103,7 @@ const Workspace = () => {
             <p>Explore Ideas and Tools</p>
           </div>
         </a>
-        <a href="https://my.unlimitednow.site/launch" className="a-5">
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://my.unlimitednow.site/launch">
           <div className="div-10">
             <picture>
               <source
@@ -124,7 +124,7 @@ const Workspace = () => {
             <p>Customize Your Site</p>
           </div>
         </a>
-        <a href="https://unlimitednow.me/start" className="a-6">
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://unlimitednow.me/start">
           <div className="div-12">
             <picture>
               <source
