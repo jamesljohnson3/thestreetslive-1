@@ -19,7 +19,7 @@ const Workspace = () => {
         <Content.Container />
        
       <div className="div">
-        <a href="/account/unlimitednow/settings/domain" className="a">
+          <a className="px-10 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://unlimitednow.site/account/unlimitednow/settings/domain">
           <div className="div-2">
             <picture>
               <source
