@@ -2,7 +2,7 @@ export default function MyComponent(props) {
   return (
     <>
  <div className="div">
-          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://unlimitednow.site/account/unlimitednow/settings/domain">
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://manage.unlimitednow.site/signup">
           <div className="div-2">
             <picture>
               <source
@@ -23,7 +23,7 @@ export default function MyComponent(props) {
             <p>Start an Online Business</p>
           </div>
         </a>
-          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://shop.unlimitpotential.com/">
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://manage.unlimitednow.site/signup">
           <div className="div-4">
             <picture>
               <source
@@ -44,7 +44,7 @@ export default function MyComponent(props) {
             <p>Create an Online Store</p>
           </div>
         </a>
-          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="http://unlimitednow.me/">
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://manage.unlimitednow.site/signup">
           <div className="div-6">
             <picture>
               <source
@@ -65,7 +65,7 @@ export default function MyComponent(props) {
             <p>Create an Ad for Social Media</p>
           </div>
         </a>
-          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="http://unlimitednow.me/explore">
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://manage.unlimitednow.site/signup">
           <div className="div-8">
             <picture>
               <source
@@ -86,7 +86,7 @@ export default function MyComponent(props) {
             <p>Explore Ideas and Tools</p>
           </div>
         </a>
-          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://my.unlimitednow.site/launch">
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://manage.unlimitednow.site/signup">
           <div className="div-10">
             <picture>
               <source
@@ -107,7 +107,7 @@ export default function MyComponent(props) {
             <p>Customize Your Site</p>
           </div>
         </a>
-          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://unlimitednow.me/start">
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://manage.unlimitednow.site/signup">
           <div className="div-12">
             <picture>
               <source
@@ -125,7 +125,7 @@ export default function MyComponent(props) {
             <div className="builder-image-sizer image-sizer-6" />
           </div>
           <div className="div-13">
-            <p>View Checklists and Goals</p>
+            <p>Creator Checklists and Goals</p>
           </div>
         </a>
       </div>
