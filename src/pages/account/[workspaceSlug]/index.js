@@ -19,7 +19,7 @@ const Workspace = () => {
         <Content.Container />
        
       <div className="div">
-          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href= {`/settings/domain`}>
+          <a className="px-6 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href= {`${workspace.name}/settings/domain`}>
           <div className="div-2">
             <picture>
               <source
