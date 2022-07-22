@@ -2,6 +2,7 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import NextAuth from 'next-auth';
 import EmailProvider from 'next-auth/providers/email';
 
+
 import prisma from '@/prisma/index';
 import { html, text } from '@/config/email-templates/signin';
 import { emailConfig, sendMail } from '@/lib/server/mail';
@@ -41,6 +42,7 @@ export default NextAuth({
       }
     },
   },
+  
   providers: [
     EmailProvider({
       from: process.env.EMAIL_FROM,
