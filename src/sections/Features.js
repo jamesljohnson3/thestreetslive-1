@@ -12,7 +12,7 @@ const Features = () => {
           <p className="text-center text-gray-600">
              Early Access Beta 
           </p>
-        </div>
+        </div><button data-arengu-modal-form-id="166095989600095398">Early Access</button>
         <div className="flex flex-col items-center justify-center pt-10 mx-auto">
           </div>
         </div>
