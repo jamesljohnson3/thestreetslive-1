@@ -1,33 +1,46 @@
-import React from 'react'
-import { useState, useEffect } from "react";
-import axios from "axios"
-function Get() {
-    const [data, setData]  = useState('');
-const getAllData = () => {
-        axios
-          .get("https://jsonplaceholder.typicode.com/users")
-          .then((response) => {
-            console.log(response.data);
-            setData(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+import axios from "axios";
+import useSWR from "swr";
+import Image from "next/image";
+
+export default function Users({ count, setCount }) {
+  const address = `https://randomuser.me/api/?results=${count}&seed=abcd`;
+  const fetcher = async (url) => await axios.get(url).then((res) => res.data);
+  const { data, error } = useSWR(address, fetcher);
+
+  if (error) <p>Loading failed...</p>;
+  if (!data) <h1>Loading...</h1>;
+
+  return (
+    <div>
+      <div className="container">
+        {data &&
+          data.results.map((item) => (
+            <div key={item.cell} className={`user-card  ${item.gender}`}>
+              <div>
+                <Image
+                  width={100}
+                  height={100}
+                  src={item.picture.large}
+                  alt="user-avatar"
+                  className="img"
+                />
+                <h3>{`${item.name.first}  ${item.name.last}`}</h3>
+              </div>
+              <div className="details">
+                <p>Country: {item.location.country}</p>
+                <p>State: {item.location.state}</p>
+                <p>Email: {item.email}</p>
+                <p>Phone: {item.phone}</p>
+                <p>Age: {item.dob.age}</p>
+              </div>
+            </div>
+          ))}
+      </div>
+      <center>
+        <div className="btn">
+          <button onClick={() => setCount(count + 3)}>Load More Users</button>
+        </div>
+      </center>
+    </div>
+  );
 }
-useEffect(() => {
-      getAllData();
-},[]);
-return (
-        <>
-            {data ? 
-                data.map(data => {
-                    return(
-                       <div className="data" key={data.id}>
-                         <h3>{data.name}</h3><button data-arengu-modal-form-id="166129762826943295">Subscribe</button>
-                       </div>
-                    )
-                }) : <h3>No data yet</h3> }
-        </>
-    )
-}
-export default Get;
