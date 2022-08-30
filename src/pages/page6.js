@@ -29,7 +29,7 @@ function IndexPage({ products }) {
 
 export async function getStaticProps() {
   const hygraph = new GraphQLClient(
-    'https://api-eu-central-1.hygraph.com/v2/ck8sn5tnf01gc01z89dbc7s0o/master'
+    'https://api-us-east-1.hygraph.com/v2/cl7cpgs7c4k0m01uj5ect8iwj/master'
   );
 
   const { products } = await hygraph.request(
