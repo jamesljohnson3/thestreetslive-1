@@ -1,4 +1,3 @@
-import "./styles.css";
 import { Widget } from "@uploadcare/react-widget";
 import { useEffect, useRef } from "react";
 import uploadcare from "uploadcare-widget";
