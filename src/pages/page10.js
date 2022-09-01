@@ -27,7 +27,7 @@ export default function App() {
     <div className="App">
       <h1>Hello CodeSandbox</h1>
       <h2>Start editing to see some magic happen!</h2>
-      <Widget ref={ref} publicKey="demopublickey" onChange={handleChange} />
+      <Widget ref={ref} publicKey="6e43ea5777778a2aa66c" onChange={handleChange} />
     </div>
   );
 }
