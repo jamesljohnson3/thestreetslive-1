@@ -5,7 +5,7 @@ import uploadcare from "uploadcare-widget";
 
 export default function App() {
   useEffect(() => {
-    window.UPLOADCARE_PUBLIC_KEY = "demopublickey";
+    window.UPLOADCARE_PUBLIC_KEY = "6e43ea5777778a2aa66c";
     window.UPLOADCARE_SYSTEM_DIALOG = true;
   }, []);
 
