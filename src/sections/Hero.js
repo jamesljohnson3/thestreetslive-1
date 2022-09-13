@@ -59,10 +59,10 @@ const Hero = () => {
           </p>
         </div>
         <div className="flex items-center justify-center space-x-5">
-          <a className="px-10 py-3 text-center text-white bg-blue-600 rounded shadow hover:bg-blue-500 " href="https://manage.unlimitednow.site/signup">
+          <a className="px-10 py-3 text-center text-white bg-blue-600 rounded shadow hover:bg-blue-500 " href="https://accounts.unlimitpotential.com">
             Get Started
           </a>
-          <a className="px-10 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://manage.unlimitednow.site/signup">
+          <a className="px-10 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://accounts.unlimitpotential.com">
             Live Demo
           </a>
         </div>
