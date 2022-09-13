@@ -27,8 +27,8 @@ Stay tuned in for updates   <br></br>   linkedin.com/company/unlimitpotential   
             <div>
               <h3 className="text-lg font-bold text-gray-400">SEO</h3>
               <h2 className="text-2xl font-bold">
-                Improve SEO and discoverability of your site<button data-arengu-modal-form-id="166095953297331844">Buy E-course</button>
-              </h2>
+                Improve SEO and discoverability of your site</h2><button data-arengu-modal-form-id="166095953297331844">Buy E-course</button>
+              
             </div>
           </div>
           <div className="p-5 space-y-5 transition rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-2">
