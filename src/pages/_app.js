@@ -9,6 +9,8 @@ import { SWRConfig } from 'swr';
 import progressBarConfig from '@/config/progress-bar/index';
 import swrConfig from '@/config/swr/index';
 import WorkspaceProvider from '@/providers/workspace';
+import "styles/tailwind.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import '@/styles/globals.css';
 
