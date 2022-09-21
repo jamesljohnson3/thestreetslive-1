@@ -27,7 +27,7 @@ const PagesDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        Demo Pages
+        Toolkit
       </a>
       <div
         ref={popoverDropdownRef}
