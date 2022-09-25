@@ -14,7 +14,7 @@ export default function MyComponent() {
         </picture>
         <div className="builder-image-sizer image-sizer" />
       </div>
-      <style jsx>{`
+     <style jsx>{`
         .div {
           display: flex;
           flex-direction: column;
@@ -28,6 +28,19 @@ export default function MyComponent() {
           margin-left: auto;
           margin-right: auto;
           align-self: center;
+        }
+        @media (max-width: 991px) {
+          .div {
+            min-width: 469px;
+            max-width: 667px;
+          }
+        }
+        @media (max-width: 640px) {
+          .div {
+            min-width: 255px;
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+          }
         }
         .image {
           object-fit: cover;
