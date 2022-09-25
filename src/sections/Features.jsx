@@ -5,7 +5,7 @@ export default function MyComponent() {
     <>
       <div className="div" lockAspectRatio={false}>
         <picture>
-          <source srcset="" type="image/webp" />
+          <source srcSet="" type="image/webp" />
           <img
             loading="lazy"
             src="https://beta.unlimitednow.site/images/uploads/Banking-app.gif"
