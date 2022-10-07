@@ -18,8 +18,9 @@ const Home = () => {
         description="Live. Grind. Surf."
       />
       <Hero />
-      <Features />
       <Pricing />
+      <Features />
+      
       <Guides />
       <Testimonial />
       <CallToAction />

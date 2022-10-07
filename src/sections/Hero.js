@@ -49,23 +49,6 @@ const Hero = () => {
             </Link>
           </div>
         </header>
-        <div className="flex flex-col items-center justify-center pt-10 mx-auto md:w-3/5">
-          <h1 className="text-6xl font-extrabold text-center">
-            <span className="block">My Site 👩🏽‍💻</span>
-            <span className="block text-blue-600">Unlimited Now</span>
-          </h1>
-          <p className="mt-5 text-center text-gray-600">
-            Save Money. Save Time.
-          </p>
-        </div>
-        <div className="flex items-center justify-center space-x-5">
-          <a className="px-10 py-3 text-center text-white bg-blue-600 rounded shadow hover:bg-blue-500 " href="https://accounts.unlimitpotential.com">
-            Get Started
-          </a>
-          <a className="px-10 py-3 text-center text-blue-600 rounded shadow hover:bg-blue-50" href="https://accounts.unlimitpotential.com">
-            Live Demo
-          </a>
-        </div>
       </div>
     </div>
   );
