@@ -145,6 +145,7 @@ const Settings = ({ user }) => {
               Unlimited Now"
             >
               <input
+              action="https://hook.us1.make.com/6rpxv2p9rhs1scjes7sqeht4um0wbbpv"
                 className="px-3 py-2 border rounded md:w-1/2"
                 disabled={isSubmitting}
                 onChange={handleEmailChange}
@@ -165,6 +166,39 @@ const Settings = ({ user }) => {
           </form>
         </Card>
         <Card>
+            <form
+        action="https://hook.us1.make.com/6rpxv2p9rhs1scjes7sqeht4um0wbbpv"
+        method="POST"
+        className="form"
+      >
+        <input
+          type="hidden"
+          name="pageId"
+          value="s3bdb9ec-17f4-4eb5-be6e-cc30958614dd"
+          className="input"
+        />
+        <input type="hidden" name="pageVariant" value="e" className="input" />
+        <div className="div">
+          
+          <div className="div-4">
+            <label htmlFor="user_id" className="label">
+            </label>
+            <input
+              name="user_id"
+              type="hidden"
+              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9_-]+\.[a-zA-Z0-9-.]{2,61}$"
+              className="input-4"
+              value={userCode}
+
+            />
+          </div>
+          
+          
+        </div>
+        <button type="submit" className="button">
+          Open BID
+        </button>
+      </form>
           <Card.Body
             title="Access token"
             subtitle="Used when interacting with APIs"

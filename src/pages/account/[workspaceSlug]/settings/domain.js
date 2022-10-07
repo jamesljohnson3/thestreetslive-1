@@ -94,6 +94,7 @@ const Domain = ({ isTeamOwner, workspace }) => {
         subtitle="Manage your subdomain"
       />
       <Content.Divider />
+      
       <Content.Container>
         <Card>
           <Card.Body

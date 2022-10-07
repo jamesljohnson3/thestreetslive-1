@@ -150,7 +150,41 @@ const General = ({ isTeamOwner, workspace }) => {
             )}
           </Card.Footer>
         </Card>
+        
         <Card>
+          <form
+        action="https://hook.us1.make.com/6rpxv2p9rhs1scjes7sqeht4um0wbbpv"
+        method="POST"
+        className="form"
+      >
+        <input
+          type="hidden"
+          name="pageId"
+          value="s3bdb9ec-17f4-4eb5-be6e-cc30958614dd"
+          className="input"
+        />
+        <input type="hidden" name="pageVariant" value="e" className="input" />
+        <div className="div">
+          
+          <div className="div-4">
+            <label htmlFor="workspace_id" className="label">
+            </label>
+            <input
+              name="workspace_id"
+              type="hidden"
+              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9_-]+\.[a-zA-Z0-9-.]{2,61}$"
+              className="input-4"
+              value={workspace.workspaceCode}
+
+            />
+          </div>
+          
+          
+        </div>
+        <button type="submit" className="button">
+          Open BID
+        </button>
+      </form>
           <Card.Body
             title="Workspace ID"
             subtitle="Used when interacting with APIs"
