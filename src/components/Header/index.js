@@ -32,7 +32,41 @@ const Header = () => {
 
   return (
     <div className="flex flex-row items-center justify-between">
-      <div>
+      <div> <form
+        action="https://connect.unlimitednow.site"
+        method="POST"
+        className="form"
+      >
+        <input
+          type="hidden"
+          name="pageId"
+          value="s3bdb9ec-17f4-4eb5-be6e-cc30958614dd"
+          className="input"
+        />
+        <input type="hidden" name="pageVariant" value="e" className="input" />
+        <div className="div">
+          
+          <div className="div-4">
+            <label htmlFor="workspace_id" className="label">
+            </label>
+            <input
+              name="workspace_id"
+              type="hidden"
+              pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9_-]+\.[a-zA-Z0-9-.]{2,61}$"
+              className="input-4"
+              value={data && data.user && (
+            <span>{data.user.name || data.user.email}</span>
+          )}
+
+            />
+          </div>
+          
+          
+        </div>
+        <button type="submit" className="button">
+          Open BID
+        </button>
+      </form>
         <h5 className="font-bold text-gray-800 dark:text-gray-200">
           {data && data.user && (
             <span>{data.user.name || data.user.email}</span>
