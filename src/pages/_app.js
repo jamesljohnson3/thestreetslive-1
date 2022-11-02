@@ -5,6 +5,7 @@ import { ThemeProvider } from 'next-themes';
 import ReactGA from 'react-ga';
 import TopBarProgress from 'react-topbar-progress-indicator';
 import { SWRConfig } from 'swr';
+import { jitsuClient } from '@jitsu/sdk-js'
 
 import progressBarConfig from '@/config/progress-bar/index';
 import swrConfig from '@/config/swr/index';
@@ -18,6 +19,10 @@ const App = ({ Component, pageProps }) => {
   const [progress, setProgress] = useState(false);
   const router = useRouter();
   const swrOptions = swrConfig();
+  const jitsu = jitsuClient({
+    key: "js.y8cs68u245tm88812ogjbx.lexjddoo45eoapayedi1ob",
+    tracking_host: "https://cryptic-ocean-01020.herokuapp.com"
+});
 
   Router.events.on('routeChangeStart', () => setProgress(true));
   Router.events.on('routeChangeComplete', () => setProgress(false));
