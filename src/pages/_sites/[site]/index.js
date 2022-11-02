@@ -8,6 +8,7 @@ import {
   getSiteWorkspace,
   getWorkspacePaths,
 } from '@/prisma/services/workspace';
+import { jitsuClient } from '@jitsu/sdk-js'
 
 const Site = ({ workspace }) => {
   const router = useRouter();

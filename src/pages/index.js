@@ -9,6 +9,7 @@ import {
   Pricing,
   Testimonial,
 } from '@/sections/index';
+import { jitsuClient } from '@jitsu/sdk-js'
 
 const Home = () => {
   const jitsu = jitsuClient({

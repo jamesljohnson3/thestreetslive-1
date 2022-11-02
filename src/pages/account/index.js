@@ -10,6 +10,7 @@ import { useInvitations, useWorkspaces } from '@/hooks/data/index';
 import { AccountLayout } from '@/layouts/index';
 import api from '@/lib/common/api';
 import { useWorkspace } from '@/providers/workspace';
+import { jitsuClient } from '@jitsu/sdk-js'
 
 const Welcome = () => {
   const router = useRouter();
