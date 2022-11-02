@@ -11,6 +11,15 @@ import {
 
 const Site = ({ workspace }) => {
   const router = useRouter();
+  const jitsu = jitsuClient({
+    key: "js.y8cs68u245tm88812ogjbx.lexjddoo45eoapayedi1ob",
+    tracking_host: "https://cryptic-ocean-01020.herokuapp.com"
+});
+
+jitsu.id({
+});
+//track page views
+jitsu.track('mysite-spaces');
 
   if (router.isFallback) {
     return <h1>Loading...</h1>;

@@ -15,14 +15,17 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import '@/styles/globals.css';
 
-const App = ({ Component, pageProps }) => {
-  const [progress, setProgress] = useState(false);
-  const router = useRouter();
-  const swrOptions = swrConfig();
+
   const jitsu = jitsuClient({
     key: "js.y8cs68u245tm88812ogjbx.lexjddoo45eoapayedi1ob",
     tracking_host: "https://cryptic-ocean-01020.herokuapp.com"
 });
+
+
+const App = ({ Component, pageProps }) => {
+  const [progress, setProgress] = useState(false);
+  const router = useRouter();
+  const swrOptions = swrConfig();
 
   Router.events.on('routeChangeStart', () => setProgress(true));
   Router.events.on('routeChangeComplete', () => setProgress(false));
