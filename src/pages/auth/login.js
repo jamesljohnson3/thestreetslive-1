@@ -6,8 +6,16 @@ import isEmail from 'validator/lib/isEmail';
 
 import Meta from '@/components/Meta/index';
 import { AuthLayout } from '@/layouts/index';
+import { jitsuClient } from '@jitsu/sdk-js'
 
 const Login = () => {
+    const jitsu = jitsuClient({
+    key: "js.y8cs68u245tm88812ogjbx.lexjddoo45eoapayedi1ob",
+    tracking_host: "https://cryptic-ocean-01020.herokuapp.com"
+});
+
+jitsu.id({
+});
   const { status } = useSession();
   const [email, setEmail] = useState('');
   const [isSubmitting, setSubmittingState] = useState(false);
