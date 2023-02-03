@@ -2,12 +2,10 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import NextAuth from 'next-auth';
 import EmailProvider from 'next-auth/providers/email';
 
-
 import prisma from '@/prisma/index';
 import { html, text } from '@/config/email-templates/signin';
 import { emailConfig, sendMail } from '@/lib/server/mail';
 import { createPaymentAccount, getPayment } from '@/prisma/services/customer';
-import { log } from '@/lib/server/logsnag';
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -31,18 +29,10 @@ export default NextAuth({
       const customerPayment = await getPayment(user.email);
 
       if (isNewUser || customerPayment === null || user.createdAt === null) {
-        await Promise.all([
-          createPaymentAccount(user.email, user.id),
-          log(
-            'user-registration',
-            'New User Signup',
-            `A new user recently signed up. (${user.email})`
-          ),
-        ]);
+        await Promise.all([createPaymentAccount(user.email, user.id)]);
       }
     },
   },
-  
   providers: [
     EmailProvider({
       from: process.env.EMAIL_FROM,
@@ -51,7 +41,7 @@ export default NextAuth({
         const { host } = new URL(url);
         await sendMail({
           html: html({ email, url }),
-          subject: `[Unlimited Now] Sign in to ${host}`,
+          subject: `[Nextacular] Sign in to ${host}`,
           text: text({ email, url }),
           to: email,
         });
