@@ -6,16 +6,8 @@ import isEmail from 'validator/lib/isEmail';
 
 import Meta from '@/components/Meta/index';
 import { AuthLayout } from '@/layouts/index';
-import { jitsuClient } from '@jitsu/sdk-js'
 
 const Login = () => {
-    const jitsu = jitsuClient({
-    key: "js.y8cs68u245tm88812ogjbx.lexjddoo45eoapayedi1ob",
-    tracking_host: "https://cryptic-ocean-01020.herokuapp.com"
-});
-
-jitsu.id({
-});
   const { status } = useSession();
   const [email, setEmail] = useState('');
   const [isSubmitting, setSubmittingState] = useState(false);
@@ -59,30 +51,27 @@ jitsu.id({
   return (
     <AuthLayout>
       <Meta
-        title=" My Site | Login"
+        title="NextJS SaaS Boilerplate | Login"
         description="A boilerplate for your NextJS SaaS projects."
       />
       <div className="flex flex-col items-center justify-center p-5 m-auto space-y-5 rounded shadow-lg md:p-10 md:w-1/3">
         <div>
-          <Link href="/">
-            <a className="text-4xl font-bold">Sign in with SSO</a>
+          <Link href="/" className="text-4xl font-bold">
+            Nextacular
           </Link>
         </div>
         <div className="text-center">
+          <h1 className="text-2xl font-bold">Sign in with your email</h1>
           <h2 className="text-gray-600">
-          </h2><a
-                className="px-10 py-3 text-lg text-center text-blue-600 bg-white rounded shadow hover:bg-blue-50"
-                href="https://login.unlimitednow.site/signin"
-              >
-                Request Early Access
-              </a>
-
+            We&apos;ll send a magic link to your inbox to confirm your email
+            address and sign you in.
+          </h2>
         </div>
         <form className="flex flex-col w-full space-y-3">
           <input
             className="px-3 py-2 border rounded"
             onChange={handleEmailChange}
-            placeholder="user@unlimitpotential.com"
+            placeholder="user@email.com"
             type="email"
             value={email}
           />
@@ -95,7 +84,7 @@ jitsu.id({
               ? 'Checking session...'
               : isSubmitting
               ? 'Sending the link...'
-              : 'Login'}
+              : 'Send the Magic Link'}
           </button>
         </form>
         {socialProviders.length > 0 && (
