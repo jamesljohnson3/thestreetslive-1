@@ -16,7 +16,7 @@ Take a look at the different ways you can [help Ukraine win](https://helpukraine
 
 ## Live Demo
 
-Nextacular Demo: [https://demo.nextacular.co](https://demo.nextacular.co)
+Nextacular iDemo: [https://demo.nextacular.co](https://demo.nextacular.co)
 
 ## Documentation
 
