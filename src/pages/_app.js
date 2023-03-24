@@ -16,9 +16,9 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import '@/styles/globals.css';
 
 
-  const jitsu = jitsuClient({
-    key: "js.y8cs68u245tm88812ogjbx.lexjddoo45eoapayedi1ob",
-    tracking_host: "https://cryptic-ocean-01020.herokuapp.com"
+const jitsu = jitsuClient({
+  key: "js.y8cs68u245tm88812ogjbx.lexjddoo45eoapayedi1ob",
+  tracking_host: "https://api.unlimitednow.site"
 });
 
 
