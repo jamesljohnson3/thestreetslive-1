@@ -21,8 +21,8 @@ export default function Form() {
     setProduct({ ...product, [field.name]: value });
   }
 
-  const CLOUD = "dbrzerj5z"; /* process.env.CLOUDINARY_CLOUD */
-  const PRESET = "dembv1vl"; /* process.env.CLOUDINARY_PRESET */
+  const CLOUD = "unlimitednow"; /* process.env.CLOUDINARY_CLOUD */
+  const PRESET = "pabbly"; /* process.env.CLOUDINARY_PRESET */
 
   const uploadImage = async () => {
     try {
@@ -38,7 +38,7 @@ export default function Form() {
       });
       // ATTENTION: Does not work with headers, at least I did not find out how!
 
-      setPreviewImage(await response.json());
+      setPreviewImage(response.secure_url);
     } catch (error) {
       console.error(error.message);
     }
