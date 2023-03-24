@@ -63,13 +63,13 @@ const Welcome = () => {
   };
   const jitsu = jitsuClient({
     key: "js.y8cs68u245tm88812ogjbx.lexjddoo45eoapayedi1ob",
-    tracking_host: "https://cryptic-ocean-01020.herokuapp.com"
-});
+    tracking_host: "https://api.unlimitednow.site"
+  });
 
-jitsu.id({
-});
-//track page views
-jitsu.track('mysite-accounts');
+  jitsu.id({
+  });
+  //track page views
+  jitsu.track('mysite-accounts');
 
   return (
     <AccountLayout>
@@ -123,9 +123,8 @@ jitsu.track('mysite-accounts');
               <Card key={index}>
                 <Card.Body
                   title={invitation.workspace.name}
-                  subtitle={`You have been invited by ${
-                    invitation.invitedBy.name || invitation.invitedBy.email
-                  }`}
+                  subtitle={`You have been invited by ${invitation.invitedBy.name || invitation.invitedBy.email
+                    }`}
                 />
                 <Card.Footer>
                   <Button
