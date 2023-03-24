@@ -62,24 +62,24 @@ const Invite = ({ workspace }) => {
                 </div>
 
                 <section>
-                  <div class="relative items-center w-full px-5 py-12 mx-auto md:px-12 lg:px-20 max-w-7xl">
-                    <div class="w-full max-w-xl p-8 mx-auto text-center">
+                  <div className="relative items-center w-full px-5 py-12 mx-auto md:px-12 lg:px-20 max-w-7xl">
+                    <div className="w-full max-w-xl p-8 mx-auto text-center">
                       <div>
-                        <h2 class="text-4xl tracking-tighter text-black">
+                        <h2 className="text-4xl tracking-tighter text-black">
                           Forgot your password?
                         </h2>
                       </div>
-                      <div class="mt-8">
-                        <div class="mt-6">
-                          <form action="#" method="POST" class="space-y-2">
-                            <div class="col-span-full">
-                              <label class="block mb-3 text-sm font-medium text-gray-600" name="email">
+                      <div className="mt-8">
+                        <div className="mt-6">
+                          <form action="#" method="POST" className="space-y-2">
+                            <div className="col-span-full">
+                              <label className="block mb-3 text-sm font-medium text-gray-600" name="email">
                                 How shall we contact you?
                               </label>
-                              <input class="block w-full px-6 py-3 text-center text-black bg-white border border-gray-200 rounded-full appearance-none placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm" placeholder="email@example.com" autocomplete="off" type="email"></input>
+                              <input className="block w-full px-6 py-3 text-center text-black bg-white border border-gray-200 rounded-full appearance-none placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm" placeholder="email@example.com" autocomplete="off" type="email"></input>
                             </div>
                             <div>
-                              <button type="" class="items-center justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-black border-2 border-black rounded-full nline-flex hover:bg-transparent hover:border-black hover:text-black focus:outline-none focus-visible:outline-black text-sm focus-visible:ring-black">
+                              <button type="" className="items-center justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-black border-2 border-black rounded-full nline-flex hover:bg-transparent hover:border-black hover:text-black focus:outline-none focus-visible:outline-black text-sm focus-visible:ring-black">
                                 <span> Submit </span>
                               </button>
                             </div>
