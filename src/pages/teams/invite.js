@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
+import Meta from '@/components/Meta';
 
 import Card from '@/components/Card/index';
 import Button from '@/components/Button';
@@ -16,7 +17,7 @@ const Invite = ({ workspace }) => {
 
   const join = () => {
     setSubmittingState(true);
-    api(`/api/workspace/team/join`, {
+    api(`https://unlimitpotntlj.dataplane.rudderstack.com/v1/webhook?writeKey=2NIgCL9xr06Z6DHLmYV3MIsUNBg`, {
       body: { workspaceCode: workspace.workspaceCode },
       method: 'POST',
     }).then((response) => {
