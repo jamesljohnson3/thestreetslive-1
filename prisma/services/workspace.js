@@ -68,6 +68,7 @@ export const getInvitation = async (inviteCode) =>
       name: true,
       workspaceCode: true,
       slug: true,
+
     },
     where: {
       deletedAt: null,
@@ -115,13 +116,13 @@ export const getSiteWorkspace = async (slug, customDomain) =>
         { slug },
         customDomain
           ? {
-              domains: {
-                some: {
-                  name: slug,
-                  deletedAt: null,
-                },
+            domains: {
+              some: {
+                name: slug,
+                deletedAt: null,
               },
-            }
+            },
+          }
           : undefined,
       ],
       AND: { deletedAt: null },
