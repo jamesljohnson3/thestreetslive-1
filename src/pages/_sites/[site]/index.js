@@ -41,7 +41,7 @@ const Site = ({ workspace }) => {
                   </p>
                     <p className="max-w-xl mt-4 text-base tracking-tight text-gray-600">
                       Use this paragraph to share information about your company or products. Make
-                      it engaging and interesting, and showcase your brand's personality. Thanks for
+                      it engaging and interesting, and showcase your brands personality. Thanks for
                       visiting our website!
                     </p>
                   </div>
@@ -74,7 +74,7 @@ const Site = ({ workspace }) => {
         </div>
       </section>
 
-      <Meta title={workspace.name} />
+      <Meta title="Unlimited Now" />
       <div className="flex flex-col items-center justify-center p-10 space-y-5 text-center ">
         <h1 className="text-4xl font-bold">
           Welcome to your workspace&apos;s subdomain!
