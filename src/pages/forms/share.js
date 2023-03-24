@@ -58,13 +58,7 @@ const Invite = ({ workspace }) => {
                   <div className="flex flex-col items-center justify-center gap-3 mt-10 lg:flex-row lg:justify-start">
 
                   </div>
-                  <Button
-                    className="items-center justify-center w-full px-6 py-2.5 text-center text-white duration-200 bg-black border-2 border-black rounded-full nline-flex hover:bg-transparent hover:border-black hover:text-black focus:outline-none lg:w-auto focus-visible:outline-black text-sm focus-visible:ring-black"
-                    disabled={isSubmitting}
-                    onClick={join}
-                  >
-                    Pubslish Ad
-                  </Button>
+
                 </div>
 
                 <section>
