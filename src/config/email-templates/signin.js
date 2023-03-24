@@ -1,12 +1,7 @@
 import { jitsuClient } from '@jitsu/sdk-js'
 
 const html = ({ email, url }) => {
-  const jitsu = jitsuClient({
-    key: "js.y8cs68u245tm88812ogjbx.lexjddoo45eoapayedi1ob",
-    tracking_host: "https://cryptic-ocean-01020.herokuapp.com"
-});
 
-jitsu.id({email});
   return `
 <body>
     <p>Welcome! You are logging in with ${email}</p>
