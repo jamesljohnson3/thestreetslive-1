@@ -49,11 +49,7 @@ const Invite = ({ workspace }) => {
                 <div className="relative max-w-lg">
                   <div>
                     <img className="object-center w-full mx-auto bg-gray-200 rounded-2xl" alt="hero" src={workspace.name}></img>
-                    <p className="max-w-xl mt-4 text-base tracking-tight text-gray-600">
-                      Use this paragraph to share information about your company or products. Make
-                      it engaging and interesting, and showcase your brands personality. Thanks for
-                      visiting our website!
-                    </p>
+
                   </div>
                   <div className="flex flex-col items-center justify-center gap-3 mt-10 lg:flex-row lg:justify-start">
 
