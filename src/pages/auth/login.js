@@ -4,7 +4,6 @@ import { getProviders, getSession, signIn, useSession } from 'next-auth/react';
 import isEmail from 'validator/lib/isEmail';
 
 import React from 'react';
-import { GetServerSidePropsContext } from 'next';
 
 const Login = () => {
   const { status } = useSession();
@@ -79,7 +78,7 @@ const Login = () => {
   );
 };
 export const getServerSideProps = async (
-  context: GetServerSidePropsContext
+  context
 ) => {
   const session = await getSession(context);
 
