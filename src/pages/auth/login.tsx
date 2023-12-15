@@ -4,7 +4,6 @@ import { getProviders, getSession, signIn, useSession } from 'next-auth/react';
 import toast from 'react-hot-toast';
 import isEmail from 'validator/lib/isEmail';
 
-import Meta from '@/components/Meta/index';
 import { AuthLayout } from '@/layouts/index';
 import React from 'react';
 import { GetServerSidePropsContext } from 'next';
@@ -52,10 +51,7 @@ const Login = () => {
 
   return (
     <AuthLayout>
-      <Meta
-        title="NextJS SaaS Boilerplate | Login"
-        description="A boilerplate for your NextJS SaaS projects."
-      />
+
       <div className="flex flex-col items-center justify-center p-5 m-auto space-y-5 rounded shadow-lg md:p-10 md:w-1/3">
         <div>
           <button
