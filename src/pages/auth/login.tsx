@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getProviders, signIn, useSession } from 'next-auth/react';
+import { getProviders, getSession, signIn, useSession } from 'next-auth/react';
 import toast from 'react-hot-toast';
 import isEmail from 'validator/lib/isEmail';
 
 import Meta from '@/components/Meta/index';
 import { AuthLayout } from '@/layouts/index';
+import React from 'react';
+import { GetServerSidePropsContext } from 'next';
 
 const Login = () => {
   const { status } = useSession();
@@ -56,9 +58,16 @@ const Login = () => {
       />
       <div className="flex flex-col items-center justify-center p-5 m-auto space-y-5 rounded shadow-lg md:p-10 md:w-1/3">
         <div>
-          <Link href="/" className="text-4xl font-bold">
-            Nextacular
-          </Link>
+          <button
+            onClick={() =>
+              signIn('github', {
+                callbackUrl: '/',
+              })
+            }
+            className="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+          >
+            Continue with Github
+          </button>
         </div>
         <div className="text-center">
           <h1 className="text-2xl font-bold">Sign in with your email</h1>
@@ -83,8 +92,8 @@ const Login = () => {
             {status === 'loading'
               ? 'Checking session...'
               : isSubmitting
-              ? 'Sending the link...'
-              : 'Send the Magic Link'}
+                ? 'Sending the link...'
+                : 'Send the Magic Link'}
           </button>
         </form>
         {socialProviders.length > 0 && (
@@ -108,5 +117,24 @@ const Login = () => {
     </AuthLayout>
   );
 };
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const session = await getSession(context);
 
+  if (session?.user) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  }
+
+  const providers = await getProviders();
+
+  return {
+    props: { providers },
+  };
+};
 export default Login;
