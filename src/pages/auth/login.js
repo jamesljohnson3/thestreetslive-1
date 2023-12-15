@@ -1,82 +1,29 @@
-import { useEffect, useState } from 'react';
-import { getProviders, getSession, signIn, useSession } from 'next-auth/react';
+import { getProviders, getSession } from 'next-auth/react'
 
-import isEmail from 'validator/lib/isEmail';
 
-import React from 'react';
-
-const Login = () => {
-  const { status } = useSession();
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setSubmittingState] = useState(false);
-  const [socialProviders, setSocialProviders] = useState([]);
-  const validate = isEmail(email);
-
-  const handleEmailChange = (event) => setEmail(event.target.value);
+const SignIn = ({
+  providers,
+}) => {
 
 
 
-  const signInWithSocial = (socialId) => {
-    signIn(socialId);
-  };
 
-  useEffect(() => {
-    (async () => {
-      const socialProviders = [];
-      const { email, ...providers } = await getProviders();
 
-      for (const provider in providers) {
-        socialProviders.push(providers[provider]);
-      }
-
-      setSocialProviders([...socialProviders]);
-    })();
-  }, []);
 
   return (
-
-    <div className="flex flex-col items-center justify-center p-5 m-auto space-y-5 rounded shadow-lg md:p-10 md:w-1/3">
-      <div>
-        <button
-          onClick={() =>
-            signIn('github', {
-              callbackUrl: '/',
-            })
-          }
-          className="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-        >
-          Continue with Github
-        </button>
-      </div>
-      <div className="text-center">
-        <h1 className="text-2xl font-bold">Sign in with your email</h1>
-        <h2 className="text-gray-600">
-          We&apos;ll send a magic link to your inbox to confirm your email
-          address and sign you in.
-        </h2>
-      </div>
-
-      {socialProviders.length > 0 && (
-        <>
-          <span className="text-sm text-gray-400">or sign in with</span>
-          <div className="flex flex-col w-full space-y-3">
-            {socialProviders.map((provider, index) => (
-              <button
-                key={index}
-                className="py-2 bg-gray-100 border rounded hover:bg-gray-50 disabled:opacity-75"
-                disabled={status === 'loading'}
-                onClick={() => signInWithSocial(provider.id)}
-              >
-                {provider.name}
-              </button>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-
-  );
-};
+    <>  <button
+      onClick={() =>
+        signIn('github', {
+          callbackUrl: '/',
+        })
+      }
+      className="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+    >
+      Continue with Github
+    </button>
+    </>
+  )
+}
 export const getServerSideProps = async (
   context
 ) => {
@@ -97,4 +44,4 @@ export const getServerSideProps = async (
     props: { providers },
   };
 };
-export default Login;
+export default SignIn
