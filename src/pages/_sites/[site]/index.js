@@ -37,7 +37,7 @@ const Site = ({ workspace }) => {
               <div className="items-center gap-12 text-left lg:gap-24 lg:inline-flex">
                 <div>
                   <div><p className="text-2xl font-medium tracking-tight text-black sm:text-4xl">
-                    I am a short heading
+                    testii121523
                   </p>
                     <p className="max-w-xl mt-4 text-base tracking-tight text-gray-600">
                       Use this paragraph to share information about your company or products. Make
