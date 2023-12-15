@@ -50,67 +50,66 @@ const Login = () => {
   }, []);
 
   return (
-    <AuthLayout>
 
-      <div className="flex flex-col items-center justify-center p-5 m-auto space-y-5 rounded shadow-lg md:p-10 md:w-1/3">
-        <div>
-          <button
-            onClick={() =>
-              signIn('github', {
-                callbackUrl: '/',
-              })
-            }
-            className="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-          >
-            Continue with Github
-          </button>
-        </div>
-        <div className="text-center">
-          <h1 className="text-2xl font-bold">Sign in with your email</h1>
-          <h2 className="text-gray-600">
-            We&apos;ll send a magic link to your inbox to confirm your email
-            address and sign you in.
-          </h2>
-        </div>
-        <form className="flex flex-col w-full space-y-3">
-          <input
-            className="px-3 py-2 border rounded"
-            onChange={handleEmailChange}
-            placeholder="user@email.com"
-            type="email"
-            value={email}
-          />
-          <button
-            className="py-2 text-white bg-blue-600 rounded hover:bg-blue-500 disabled:opacity-75"
-            disabled={status === 'loading' || !validate || isSubmitting}
-            onClick={signInWithEmail}
-          >
-            {status === 'loading'
-              ? 'Checking session...'
-              : isSubmitting
-                ? 'Sending the link...'
-                : 'Send the Magic Link'}
-          </button>
-        </form>
-        {socialProviders.length > 0 && (
-          <>
-            <span className="text-sm text-gray-400">or sign in with</span>
-            <div className="flex flex-col w-full space-y-3">
-              {socialProviders.map((provider, index) => (
-                <button
-                  key={index}
-                  className="py-2 bg-gray-100 border rounded hover:bg-gray-50 disabled:opacity-75"
-                  disabled={status === 'loading'}
-                  onClick={() => signInWithSocial(provider.id)}
-                >
-                  {provider.name}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+    <div className="flex flex-col items-center justify-center p-5 m-auto space-y-5 rounded shadow-lg md:p-10 md:w-1/3">
+      <div>
+        <button
+          onClick={() =>
+            signIn('github', {
+              callbackUrl: '/',
+            })
+          }
+          className="w-full py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+        >
+          Continue with Github
+        </button>
       </div>
-    </AuthLayout>
+      <div className="text-center">
+        <h1 className="text-2xl font-bold">Sign in with your email</h1>
+        <h2 className="text-gray-600">
+          We&apos;ll send a magic link to your inbox to confirm your email
+          address and sign you in.
+        </h2>
+      </div>
+      <form className="flex flex-col w-full space-y-3">
+        <input
+          className="px-3 py-2 border rounded"
+          onChange={handleEmailChange}
+          placeholder="user@email.com"
+          type="email"
+          value={email}
+        />
+        <button
+          className="py-2 text-white bg-blue-600 rounded hover:bg-blue-500 disabled:opacity-75"
+          disabled={status === 'loading' || !validate || isSubmitting}
+          onClick={signInWithEmail}
+        >
+          {status === 'loading'
+            ? 'Checking session...'
+            : isSubmitting
+              ? 'Sending the link...'
+              : 'Send the Magic Link'}
+        </button>
+      </form>
+      {socialProviders.length > 0 && (
+        <>
+          <span className="text-sm text-gray-400">or sign in with</span>
+          <div className="flex flex-col w-full space-y-3">
+            {socialProviders.map((provider, index) => (
+              <button
+                key={index}
+                className="py-2 bg-gray-100 border rounded hover:bg-gray-50 disabled:opacity-75"
+                disabled={status === 'loading'}
+                onClick={() => signInWithSocial(provider.id)}
+              >
+                {provider.name}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+
   );
 };
 export const getServerSideProps = async (
