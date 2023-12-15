@@ -4,7 +4,6 @@ import { getProviders, getSession, signIn, useSession } from 'next-auth/react';
 import toast from 'react-hot-toast';
 import isEmail from 'validator/lib/isEmail';
 
-import { AuthLayout } from '@/layouts/index';
 import React from 'react';
 import { GetServerSidePropsContext } from 'next';
 
