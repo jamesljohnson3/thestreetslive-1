@@ -116,6 +116,7 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                       <Link
                         key={id}
                         href={`https://unlimitednow.site/forms/share?code=7aed03a9-9381-4397-9ae6-d91977a2f2e1&photoId=${id}`}
+                        as={`https://unlimitednow.site/forms/share?code=7aed03a9-9381-4397-9ae6-d91977a2f2e1&photoId=${id}`}
                         id={`photo-${id}`}
                         shallow
                         className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight"
