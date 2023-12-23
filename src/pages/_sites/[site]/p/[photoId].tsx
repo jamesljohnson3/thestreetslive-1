@@ -58,13 +58,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
   }
 
-  const requestedIndex = Number(photoId);
-  if (isNaN(requestedIndex) || requestedIndex < 0 || requestedIndex >= reducedResults.length) {
-    // Handle the case when `context.params.photoId` is not a valid index
-    return {
-      notFound: true,
-    };
-  }
 
   const currentPhoto = reducedResults.find(
     (img) => img.id === Number(context.params.photoId)
