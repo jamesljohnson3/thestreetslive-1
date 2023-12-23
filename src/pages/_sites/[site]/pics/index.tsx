@@ -9,10 +9,7 @@ import Modal from '../../../../components/Modal';
 import cloudinary from '../../../../utils/cloudinary';
 import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
 
-import {
-  getSiteWorkspace,
-  getWorkspacePaths,
-} from '../../../../../prisma/services/workspace';
+import { getSiteWorkspace, getWorkspacePaths } from '../../../../../prisma/services/workspace';
 import { useLastViewedPhoto } from '../../../../utils/useLastViewedPhoto';
 import type { ImageProps } from '../../../../utils/types';
 
@@ -83,11 +80,11 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
   return (
     <>
       <Head>
-        <title></title>
+        <title>Your Page Title</title>
         <meta property="og:image" content="" />
         <meta name="twitter:image" content="" />
       </Head>
-      <main className="">
+      <main>
         {photoId && (
           <Modal
             images={images}
@@ -96,57 +93,61 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
             }}
           />
         )}
-        <div className="flex min-h-full flex-col font-sans text-zinc-900 bg-zinc-50 dark:text-zinc-100 dark:bg-black">
-          <div className="text-center">Header</div>
+        <div>
+          <div>Header</div>
           <section>
-            <div className="max-w-screen-3xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8">
-              <section className="shadow-lg">
+            <div>
+              <section>
                 Content
               </section>
-              <div className="text-center mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
+              <div>
                 Cta Banner
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-                  {images.map(({ id, public_id, format, blurDataUrl }) => (
-                    <Link
-                      key={id}
-                      href={`/?photoId=${id}`}
-                      as={`/p/${id}`}
-                      id={`photo-${id}`}
-                      shallow
-                      className="after:content group relative cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
-                    >
-                      <Image
-                        alt="Next.js Conf photo"
-                        className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
-                        style={{ transform: 'translate3d(0, 0, 0)' }}
-                        placeholder="blur"
-                        blurDataURL={blurDataUrl}
-                        src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
-                        width={720}
-                        height={480}
-                        sizes="(max-width: 640px) 100vw,
+                <div>
+                  {Array.isArray(images) && images.length > 0 ? (
+                    images.map(({ id, public_id, format, blurDataUrl }) => (
+                      <Link
+                        key={id}
+                        href={`/?photoId=${id}`}
+                        as={`/p/${id}`}
+                        id={`photo-${id}`}
+                        shallow
+                        className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight"
+                      >
+                        <Image
+                          alt="Next.js Conf photo"
+                          className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
+                          style={{ transform: 'translate3d(0, 0, 0)' }}
+                          placeholder="blur"
+                          blurDataURL={blurDataUrl}
+                          src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
+                          width={720}
+                          height={480}
+                          sizes="(max-width: 640px) 100vw,
                             (max-width: 1280px) 50vw,
                             (max-width: 1536px) 33vw,
                             25vw"
-                      />
-                    </Link>
-                  ))}
+                        />
+                      </Link>
+                    ))
+                  ) : (
+                    <p>No images available.</p>
+                  )}
                 </div>
               </div>
-              <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+              <main>
                 <div>
-                  <article className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
-                    <div className="text-center">content</div>
+                  <article>
+                    <div>Content</div>
                   </article>
                 </div>
               </main>
-              <div className="text-center mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
+              <div>
                 Header
               </div>
-              <main className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+              <main>
                 <div>
-                  <article className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
-                    <div className="text-center">content</div>
+                  <article>
+                    <div>Content</div>
                   </article>
                 </div>
               </main>
