@@ -1,4 +1,3 @@
-// Import necessary modules and types...
 import type { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -69,7 +68,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async ({ params }) => {
+export const getStaticPaths: GetStaticPaths<{ site: string }> = async ({ params }) => {
   if (!params || !params.site) {
     // Handle the case when params or params.site is not available
     return {
