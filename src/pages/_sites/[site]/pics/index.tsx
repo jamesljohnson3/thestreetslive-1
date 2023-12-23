@@ -107,7 +107,7 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                     images.map(({ id, public_id, format, blurDataUrl }) => (
                       <Link
                         key={id}
-                        href={`/?photoId=${id}`}
+                        href={`${siteWorkspace.slug}.thestreets.live/?photoId=${id}`}
                         as={`/p/${id}`}
                         id={`photo-${id}`}
                         shallow
