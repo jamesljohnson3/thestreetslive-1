@@ -5,10 +5,10 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Modal from '../../../../components/Modal'; // Import your Modal component
+import Modal from '../../../../components/Modal';
 import cloudinary from '../../../../utils/cloudinary';
 import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
-import { getWorkspacePaths, getSiteWorkspace } from '../../../../utils/yourWorkspaceUtils'; // Import your utility functions
+import { getWorkspacePaths, getSiteWorkspace } from '../../../../utils/yourWorkspaceUtils';
 import { useLastViewedPhoto } from '../../../../utils/useLastViewedPhoto';
 import type { ImageProps } from '../../../../utils/types';
 
@@ -23,30 +23,50 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const { site } = params;
   const siteWorkspace = await getSiteWorkspace(site, site.includes('.'));
-  let workspace = null;
+  const results = await cloudinary.v2.search
+    .expression(`folder:${siteWorkspace.slug}/*`)
+    .sort_by('public_id', 'desc')
+    .max_results(400)
+    .execute();
 
-  if (siteWorkspace) {
-    const { host } = new URL(process.env.APP_URL);
-    workspace = {
-      domains: siteWorkspace.domains,
-      name: siteWorkspace.name,
-      hostname: `${siteWorkspace.slug}.${host}`,
-    };
+  let reducedResults: ImageProps[] = [];
+
+  let i = 0;
+  for (let result of results.resources) {
+    reducedResults.push({
+      id: i,
+      height: result.height,
+      width: result.width,
+      public_id: result.public_id,
+      format: result.format,
+    });
+    i++;
+  }
+
+  const blurImagePromises = results.resources.map((image: ImageProps) => {
+    return getBase64ImageUrl(image);
+  });
+
+  const imagesWithBlurDataUrls = await Promise.all(blurImagePromises);
+
+  for (let i = 0; i < reducedResults.length; i++) {
+    reducedResults[i].blurDataUrl = imagesWithBlurDataUrls[i];
   }
 
   return {
-    props: { workspace },
+    props: {
+      images: reducedResults,
+    },
     revalidate: 10,
   };
 };
 
-const DynamicPage: NextPage = ({ workspace }: { workspace: YourWorkspaceType }) => {
+const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
   const router = useRouter();
   const { photoId } = router.query;
   const [lastViewedPhoto, setLastViewedPhoto] = useLastViewedPhoto();
 
   useEffect(() => {
-    // This effect keeps track of the last viewed photo in the modal to keep the index page in sync when the user navigates back
     if (lastViewedPhoto && !photoId) {
       document
         .querySelector(`#photo-${lastViewedPhoto}`)
@@ -66,7 +86,7 @@ const DynamicPage: NextPage = ({ workspace }: { workspace: YourWorkspaceType }) 
       <main className="">
         {photoId && (
           <Modal
-            images={images} // Make sure you have the 'images' prop defined or passed appropriately
+            images={images}
             onClose={() => {
               setLastViewedPhoto(photoId);
             }}
@@ -78,7 +98,6 @@ const DynamicPage: NextPage = ({ workspace }: { workspace: YourWorkspaceType }) 
             <div className="max-w-screen-3xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8">
               <section className="shadow-lg">
                 Content
-                {/* Put the rest of your page here. */}
               </section>
               <div className="text-center mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
                 Cta Banner
