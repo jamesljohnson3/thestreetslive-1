@@ -1,5 +1,5 @@
 // Import necessary modules...
-import { GetStaticProps, GetStaticPaths, GetStaticPathsContext, NextPage } from 'next';
+import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Carousel from '../../../../components/Carousel';
@@ -64,16 +64,18 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async ({ params }: GetStaticPathsContext) => {
-  if (!params || !params.site) {
-    // Handle the case when params or params.site is not available
+export const getStaticPaths: GetStaticPaths<{ site: string }> = async () => {
+  const router = useRouter();
+  const { site } = router.query;
+
+  if (!site) {
+    // Handle the case when `site` is not available
     return {
       paths: [],
       fallback: false,
     };
   }
 
-  const { site } = params;
   const siteWorkspace = await getSiteWorkspace(site, site.includes('.'));
   const results = await cloudinary.v2.search
     .expression(`folder:${siteWorkspace.slug}/*`)
