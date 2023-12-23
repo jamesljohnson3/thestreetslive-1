@@ -81,7 +81,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     .max_results(400)
     .execute();
 
-  const fullPaths = results.resources.map((_, i) => ({ params: { photoId: i.toString() } }));
+  const fullPaths = results.resources.map((_, i) => ({ params: { site, photoId: i.toString() } }));
 
   return {
     paths: fullPaths,
