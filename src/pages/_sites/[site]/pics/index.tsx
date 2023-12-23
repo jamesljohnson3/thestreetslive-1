@@ -28,7 +28,7 @@ export const getStaticProps = async ({ params }) => {
   const results = await cloudinary.v2.search
     .expression(`folder:${siteWorkspace.slug}/*`)
     .sort_by('public_id', 'desc')
-    .max_results(400)
+    .max_results(1000)
     .execute();
 
   let reducedResults: ImageProps[] = [];

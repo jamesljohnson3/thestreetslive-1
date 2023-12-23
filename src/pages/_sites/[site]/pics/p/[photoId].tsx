@@ -1,12 +1,12 @@
 // Import necessary modules...
 import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import Head from 'next/head';
-import Carousel from '../../../../components/Carousel';
-import getResults from '../../../../utils/cachedImages';
-import cloudinary from '../../../../utils/cloudinary';
-import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
-import type { ImageProps } from '../../../../utils/types';
-import { getSiteWorkspace } from '../../../../../prisma/services/workspace';
+import Carousel from '../../../../../components/Carousel';
+import getResults from '../../../../../utils/cachedImages';
+import cloudinary from '../../../../../utils/cloudinary';
+import getBase64ImageUrl from '../../../../../utils/generateBlurPlaceholder';
+import type { ImageProps } from '../../../../../utils/types';
+import { getSiteWorkspace } from '../../../../../../prisma/services/workspace';
 import { useRouter } from 'next/router';
 
 const PhotoPage: NextPage<{ currentPhoto: ImageProps }> = ({ currentPhoto }) => {
