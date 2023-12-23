@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import Modal from '../../../../components/Modal';
 import cloudinary from '../../../../utils/cloudinary';
 import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
+import Script from 'next/script';
 
 import { getSiteWorkspace, getWorkspacePaths } from '../../../../../prisma/services/workspace';
 import { useLastViewedPhoto } from '../../../../utils/useLastViewedPhoto';
@@ -83,6 +84,8 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
         <title>Your Page Title</title>
         <meta property="og:image" content="" />
         <meta name="twitter:image" content="" />
+        <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
+
       </Head>
       <main>
         {photoId && (
