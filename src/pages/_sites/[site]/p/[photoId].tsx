@@ -1,5 +1,5 @@
 // Import necessary modules...
-import { GetStaticProps, GetStaticPaths, NextPage, GetStaticPathsContext } from 'next';
+import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import Head from 'next/head';
 import Carousel from '../../../../components/Carousel';
 import getResults from '../../../../utils/cachedImages';
@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async ({ params }: GetStaticPathsContext) => {
+export const getStaticPaths: GetStaticPaths = async ({ params }) => {
   if (!params || !params.site) {
     // Handle the case when params or params.site is not available
     return {
