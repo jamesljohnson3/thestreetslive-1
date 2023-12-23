@@ -116,7 +116,7 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                       <Link
                         key={id}
                         href={`/?photoId=${id}`}
-                        as={`/p/${id}`}
+                        as={`pics/p/${id}`}
                         id={`photo-${id}`}
                         shallow
                         className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight"
