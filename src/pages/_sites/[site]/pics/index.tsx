@@ -8,7 +8,11 @@ import { useRouter } from 'next/router';
 import Modal from '../../../../components/Modal';
 import cloudinary from '../../../../utils/cloudinary';
 import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
-import { getWorkspacePaths, getSiteWorkspace } from '../../../../utils/yourWorkspaceUtils';
+
+import {
+  getSiteWorkspace,
+  getWorkspacePaths,
+} from '@/prisma/services/workspace';
 import { useLastViewedPhoto } from '../../../../utils/useLastViewedPhoto';
 import type { ImageProps } from '../../../../utils/types';
 
