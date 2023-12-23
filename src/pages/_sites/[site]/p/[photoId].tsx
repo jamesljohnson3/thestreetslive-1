@@ -32,6 +32,18 @@ const Home: NextPage = ({ currentPhoto }: { currentPhoto: ImageProps }) => {
 
 export default Home;
 
+const fetchStaticPaths = async (site: string) => {
+  const siteWorkspace = await getSiteWorkspace(site, site.includes('.'));
+  const results = await cloudinary.v2.search
+    .expression(`folder:${siteWorkspace.slug}/*`)
+    .sort_by('public_id', 'desc')
+    .max_results(400)
+    .execute();
+
+  const fullPaths = results.resources.map((_, i) => ({ params: { site, photoId: i.toString() } }));
+  return fullPaths;
+};
+
 export const getStaticProps: GetStaticProps = async (context) => {
   const results = await getResults();
 
@@ -76,14 +88,7 @@ export const getStaticPaths: GetStaticPaths<{ site: string }> = async () => {
     };
   }
 
-  const siteWorkspace = await getSiteWorkspace(site, site.includes('.'));
-  const results = await cloudinary.v2.search
-    .expression(`folder:${siteWorkspace.slug}/*`)
-    .sort_by('public_id', 'desc')
-    .max_results(400)
-    .execute();
-
-  const fullPaths = results.resources.map((_, i) => ({ params: { site, photoId: i.toString() } }));
+  const fullPaths = await fetchStaticPaths(site as string);
 
   return {
     paths: fullPaths,
