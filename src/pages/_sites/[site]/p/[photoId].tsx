@@ -67,13 +67,17 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const site = "your-site"; // replace with your default site
   const siteWorkspace = await getSiteWorkspace(site, site.includes('.'));
+
   const results = await cloudinary.v2.search
     .expression(`folder:${siteWorkspace.slug}/*`)
     .sort_by('public_id', 'desc')
     .max_results(400)
     .execute();
 
-  const fullPaths = results.resources.map((_, i) => ({ params: { site, photoId: i.toString() } }));
+  let fullPaths = [];
+  for (let i = 0; i < results.resources.length; i++) {
+    fullPaths.push({ params: { photoId: i.toString() } });
+  }
 
   return {
     paths: fullPaths,
