@@ -44,7 +44,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }));
 
   const { site, photoId } = context.params;
-  const siteWorkspace = await getSiteWorkspace(site, site.includes('.'));
+
+  // Ensure siteWorkspace is defined and has a slug property
+  const siteWorkspace = await getSiteWorkspace(site, site?.includes('.'));
+  if (!siteWorkspace || !siteWorkspace.slug) {
+    return {
+      notFound: true,
+    };
+  }
 
   const requestedIndex = Number(photoId);
   if (isNaN(requestedIndex) || requestedIndex < 0 || requestedIndex >= reducedResults.length) {
@@ -55,6 +62,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
 
   const currentPhoto = reducedResults.find((img) => img.id === requestedIndex);
+
+  // Ensure currentPhoto is found
+  if (!currentPhoto) {
+    return {
+      notFound: true,
+    };
+  }
+
   currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto);
 
   return {
@@ -66,7 +81,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const site = "your-site"; // replace with your default site
-  const siteWorkspace = await getSiteWorkspace(site, site.includes('.'));
+
+  // Ensure siteWorkspace is defined and has a slug property
+  const siteWorkspace = await getSiteWorkspace(site, site?.includes('.'));
+  if (!siteWorkspace || !siteWorkspace.slug) {
+    return {
+      paths: [],
+      fallback: false,
+    };
+  }
 
   const results = await cloudinary.v2.search
     .expression(`folder:${siteWorkspace.slug}/*`)
@@ -74,10 +97,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
     .max_results(400)
     .execute();
 
-  let fullPaths = [];
-  for (let i = 0; i < results.resources.length; i++) {
-    fullPaths.push({ params: { photoId: i.toString() } });
+  // Ensure results is defined
+  if (!results) {
+    return {
+      paths: [],
+      fallback: false,
+    };
   }
+
+  const fullPaths = results.resources.map((_, i) => ({ params: { photoId: i.toString() } }));
 
   return {
     paths: fullPaths,
