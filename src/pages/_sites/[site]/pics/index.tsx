@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 import Modal from '../../../../components/Modal';
 import cloudinary from '../../../../utils/cloudinary';
 import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
-import Script from 'next/script';
 
 import { getSiteWorkspace, getWorkspacePaths } from '../../../../../prisma/services/workspace';
 import { useLastViewedPhoto } from '../../../../utils/useLastViewedPhoto';
@@ -84,9 +83,6 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
         <title>Your Page Title</title>
         <meta property="og:image" content="" />
         <meta name="twitter:image" content="" />
-        <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
-
-
       </Head>
       <main>
         {photoId && (
@@ -111,7 +107,7 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                     images.map(({ id, public_id, format, blurDataUrl }) => (
                       <Link
                         key={id}
-                        href={`${siteWorkspace.slug}.thestreets.live/?photoId=${id}`}
+                        href={`/?photoId=${id}`}
                         as={`/p/${id}`}
                         id={`photo-${id}`}
                         shallow
