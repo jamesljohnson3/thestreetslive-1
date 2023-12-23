@@ -48,6 +48,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   }
   const { site, photoId } = context.params;
 
+
+
   // Ensure siteWorkspace is defined and has a slug property
   const siteWorkspace = await getSiteWorkspace(site, site?.includes('.'));
   if (!siteWorkspace || !siteWorkspace.slug) {
@@ -64,7 +66,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
   }
 
-  const currentPhoto = reducedResults.find((img) => img.id === requestedIndex);
+  const currentPhoto = reducedResults.find(
+    (img) => img.id === Number(context.params.photoId)
+  )
+
+  currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto)
 
   // Ensure currentPhoto is found
   if (!currentPhoto) {
