@@ -1,5 +1,5 @@
 // Import necessary modules...
-import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
+import { GetStaticProps, GetStaticPaths, NextPage, GetStaticPathsContext } from 'next';
 import Head from 'next/head';
 import Carousel from '../../../../components/Carousel';
 import getResults from '../../../../utils/cachedImages';
@@ -7,7 +7,7 @@ import cloudinary from '../../../../utils/cloudinary';
 import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
 import type { ImageProps } from '../../../../utils/types';
 import { getSiteWorkspace } from '../../../../../prisma/services/workspace';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 const Home: NextPage = ({ currentPhoto }: { currentPhoto: ImageProps }) => {
   const router = useRouter();
