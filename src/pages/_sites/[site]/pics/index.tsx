@@ -79,12 +79,12 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
   }, [photoId, lastViewedPhoto, setLastViewedPhoto]);
 
   return (
-    <>
+    <>        <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
+
       <Head>
         <title>Your Page Title</title>
         <meta property="og:image" content="" />
         <meta name="twitter:image" content="" />
-        <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
 
       </Head>
       <main>
