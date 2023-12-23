@@ -9,18 +9,9 @@ import {
   Pricing,
   Testimonial,
 } from '@/sections/index';
-import { jitsuClient } from '@jitsu/sdk-js'
 
 const Home = () => {
-  const jitsu = jitsuClient({
-    key: "js.y8cs68u245tm88812ogjbx.lexjddoo45eoapayedi1ob",
-    tracking_host: "https://api.unlimitednow.site"
-  });
 
-  jitsu.id({
-  });
-  //track page views
-  jitsu.track('mysite-page');
 
 
 
