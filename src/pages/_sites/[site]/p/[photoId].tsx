@@ -70,7 +70,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     (img) => img.id === Number(context.params.photoId)
   )
 
-  currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto)
 
   // Ensure currentPhoto is found
   if (!currentPhoto) {
@@ -89,35 +88,20 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const site = "your-site"; // replace with your default site
-
-  // Ensure siteWorkspace is defined and has a slug property
-  const siteWorkspace = await getSiteWorkspace(site, site?.includes('.'));
-  if (!siteWorkspace || !siteWorkspace.slug) {
-    return {
-      paths: [],
-      fallback: false,
-    };
-  }
-
   const results = await cloudinary.v2.search
-    .expression(`folder:${siteWorkspace.slug}/*`)
+    .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
     .sort_by('public_id', 'desc')
     .max_results(400)
-    .execute();
+    .execute()
 
-  // Ensure results is defined
-  if (!results) {
-    return {
-      paths: [],
-      fallback: false,
-    };
+  let fullPaths = []
+  for (let i = 0; i < results.resources.length; i++) {
+    fullPaths.push({ params: { photoId: i.toString() } })
   }
-
-  const fullPaths = results.resources.map((_, i) => ({ params: { photoId: i.toString() } }));
 
   return {
     paths: fullPaths,
     fallback: false,
+
   };
 };
