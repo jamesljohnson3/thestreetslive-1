@@ -63,11 +63,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export const getStaticPaths: GetStaticPaths<{ site: string }> = async (context) => {
-  const { params } = context;
-
+export const getStaticPaths: GetStaticPaths = async ({ params }: GetStaticPathsContext) => {
   if (!params || !params.site) {
-    // Handle the case when `params` or `params.site` is not available
+    // Handle the case when params or params.site is not available
     return {
       paths: [],
       fallback: false,
