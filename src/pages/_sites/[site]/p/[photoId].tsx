@@ -1,18 +1,19 @@
-// Import necessary modules...
-import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
+import type { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Carousel from '../../../../components/Carousel';
 import getResults from '../../../../utils/cachedImages';
 import cloudinary from '../../../../utils/cloudinary';
 import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
 import type { ImageProps } from '../../../../utils/types';
-import { getSiteWorkspace } from '../../../../../prisma/services/workspace';
-import { useRouter } from 'next/router';
 
-const PhotoPage: NextPage<{ currentPhoto: ImageProps }> = ({ currentPhoto }) => {
+// Add your Prisma imports here
+import { getSiteWorkspace, getWorkspacePaths } from '../../../../../prisma/services/workspace';
+
+const Home: NextPage = ({ currentPhoto }: { currentPhoto: ImageProps }) => {
   const router = useRouter();
   const { photoId } = router.query;
-  let index = Number(photoId)
+  let index = Number(photoId);
 
   const currentPhotoUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_2560/${currentPhoto.public_id}.${currentPhoto.format}`;
 
@@ -30,13 +31,16 @@ const PhotoPage: NextPage<{ currentPhoto: ImageProps }> = ({ currentPhoto }) => 
   );
 };
 
-export default PhotoPage;
+export default Home;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const results = await getResults()
+  const { params } = context;
+  const { photoId } = params;
 
-  let reducedResults: ImageProps[] = []
-  let i = 0
+  const results = await getResults(); // Adjust this line based on your actual data fetching logic
+
+  let reducedResults: ImageProps[] = [];
+  let i = 0;
   for (let result of results.resources) {
     reducedResults.push({
       id: i,
@@ -44,43 +48,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
       width: result.width,
       public_id: result.public_id,
       format: result.format,
-    })
-    i++
+    });
+    i++;
   }
 
   const currentPhoto = reducedResults.find(
-    (img) => img.id === Number(context.params.photoId)
-  )
-  currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto)
-
-
-
-  const { site, photoId } = context.params;
-
-  // Ensure siteWorkspace is defined and has a slug property
-  const siteWorkspace = await getSiteWorkspace(site, site?.includes('.'));
-  if (!siteWorkspace || !siteWorkspace.slug) {
-    return {
-      notFound: true,
-    };
-  }
-
-  const requestedIndex = Number(photoId);
-  if (isNaN(requestedIndex) || requestedIndex < 0 || requestedIndex >= reducedResults.length) {
-    // Handle the case when `context.params.photoId` is not a valid index
-    return {
-      notFound: true,
-    };
-  }
-
-
-  // Ensure currentPhoto is found
-  if (!currentPhoto) {
-    return {
-      notFound: true,
-    };
-  }
-
+    (img) => img.id === Number(photoId)
+  );
   currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto);
 
   return {
@@ -91,35 +65,21 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const site = "your-site"; // replace with your default site
-
-  // Ensure siteWorkspace is defined and has a slug property
-  const siteWorkspace = await getSiteWorkspace(site, site?.includes('.'));
-  if (!siteWorkspace || !siteWorkspace.slug) {
-    return {
-      paths: [],
-      fallback: false,
-    };
-  }
-
+  const paths = await getWorkspacePaths();
+  const siteWorkspace = await getSiteWorkspace(/* add your site parameter here */);
   const results = await cloudinary.v2.search
     .expression(`folder:${siteWorkspace.slug}/*`)
     .sort_by('public_id', 'desc')
     .max_results(400)
     .execute();
 
-  // Ensure results is defined
-  if (!results) {
-    return {
-      paths: [],
-      fallback: false,
-    };
+  let fullPaths = [];
+  for (let i = 0; i < results.resources.length; i++) {
+    fullPaths.push({ params: { photoId: i.toString() } });
   }
-
-  const fullPaths = results.resources.map((_, i) => ({ params: { photoId: i.toString() } }));
 
   return {
     paths: fullPaths,
-    fallback: false,
+    fallback: true,
   };
 };
