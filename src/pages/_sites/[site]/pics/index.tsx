@@ -96,16 +96,21 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
             }}
           />
         )}
-        <div>
-          <div>Header</div>
+
+        <div className="flex min-h-full flex-col font-sans text-zinc-900 bg-zinc-50 dark:text-zinc-100 dark:bg-black"><div className="text-center">
+          Header  </div>
           <section>
-            <div>
-              <section>
+            <div className="max-w-screen-3xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8">
+              <section className="shadow-lg">
+
                 Content
+
+                {/* Put the rest of your page here. */}
               </section>
-              <div>
+              <div className="text-center mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
                 Cta Banner
-                <div>
+
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                   {Array.isArray(images) && images.length > 0 ? (
                     images.map(({ id, public_id, format, blurDataUrl }) => (
                       <Link
