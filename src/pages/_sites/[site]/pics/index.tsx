@@ -12,7 +12,7 @@ import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
 import {
   getSiteWorkspace,
   getWorkspacePaths,
-} from '@/prisma/services/workspace';
+} from '../../../../../prisma/services/workspace';
 import { useLastViewedPhoto } from '../../../../utils/useLastViewedPhoto';
 import type { ImageProps } from '../../../../utils/types';
 
