@@ -34,15 +34,18 @@ export default PhotoPage;
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const results = await getResults();
-
-  const reducedResults: ImageProps[] = results.resources.map((result, i) => ({
-    id: i,
-    height: result.height,
-    width: result.width,
-    public_id: result.public_id,
-    format: result.format,
-  }));
-
+  let reducedResults: ImageProps[] = []
+  let i = 0
+  for (let result of results.resources) {
+    reducedResults.push({
+      id: i,
+      height: result.height,
+      width: result.width,
+      public_id: result.public_id,
+      format: result.format,
+    })
+    i++
+  }
   const { site, photoId } = context.params;
 
   // Ensure siteWorkspace is defined and has a slug property
