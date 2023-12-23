@@ -7,6 +7,7 @@ import cloudinary from '../../../../utils/cloudinary';
 import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
 import type { ImageProps } from '../../../../utils/types';
 import { getSiteWorkspace } from '../../../../../prisma/services/workspace';
+import { useRouter } from 'next/router'
 
 const Home: NextPage = ({ currentPhoto }: { currentPhoto: ImageProps }) => {
   const router = useRouter();
