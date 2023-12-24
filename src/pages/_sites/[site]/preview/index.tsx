@@ -15,25 +15,26 @@ const PhotoNotFound: React.FC = () => {
 
 const PhotoPreviewPage: NextPage = () => {
     const router = useRouter();
-    const { photoId } = router.query;
+    const { id } = router.query;
 
-    // Check if photoId exists and render the larger view
-    if (photoId) {
-        return (
-            <div>
-                <Image
-                    src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${photoId}`}
-                    className="pointer-events-none h-full w-full"
-                    sizes="(min-width: 808px) 50vw, 100vw"
-                    style={{
-                        objectFit: 'cover', // cover, contain, none
-                    }}
-                />
-            </div>
-        );
+    // Check if id exists
+    if (!id) {
+        return <PhotoNotFound />;
     }
 
-    return <PhotoNotFound />;
+    // Render the larger view of the photo
+    return (
+        <div>
+            <Image
+                src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${id}`}
+                className="pointer-events-none h-full w-full"
+                sizes="(min-width: 808px) 50vw, 100vw"
+                style={{
+                    objectFit: 'cover', // cover, contain, none
+                }}
+            />
+        </div>
+    );
 };
 
 export default PhotoPreviewPage;

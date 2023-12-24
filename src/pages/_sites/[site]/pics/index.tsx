@@ -115,8 +115,8 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                     images.map(({ id, public_id, format, blurDataUrl }) => (
                       <Link
                         key={id}
-                        href={`/preview/${public_id}`}  // Set the appropriate path
-                        as={`/preview/${public_id}`}  // Set the appropriate path
+                        href={`/preview?id=${public_id}`}  // Set the appropriate path
+                        as={`/preview?id=${public_id}`}  // Set the appropriate path
                         id={`photo-${id}`}
                         shallow
                         className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight"
