@@ -36,7 +36,6 @@ const Home: NextPage = ({ currentPhoto }: { currentPhoto: ImageProps }) => {
 
 export default Home;
 
-
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
   const { photoId } = params;
@@ -49,14 +48,21 @@ export const getStaticProps: GetStaticProps = async (context) => {
   for (let result of results.resources) {
     // Check if the required properties exist
     if (result && result.public_id && result.format) {
+      const blurDataUrl = await getBase64ImageUrl({
+        id: i,
+        height: result.height,
+        width: result.width,
+        public_id: result.public_id,
+        format: result.format,
+      });
+
       reducedResults.push({
         id: i,
         height: result.height,
         width: result.width,
         public_id: result.public_id,
         format: result.format,
-        blurDataUrl: '', // Initialize blurDataUrl property
-
+        blurDataUrl,
       });
       i++;
     }
@@ -73,8 +79,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       notFound: true,
     };
   }
-
-  currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto);
 
   return {
     props: {
