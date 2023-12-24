@@ -20,7 +20,7 @@ const PhotoDetailPage: NextPage = () => {
                         // Use the appropriate properties to display the larger view of the photo
                         src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/large/${photoId}`}
                         className="pointer-events-none h-full w-full"
-                        fill
+
                         width="100%"
                         height="100%"
                     />
