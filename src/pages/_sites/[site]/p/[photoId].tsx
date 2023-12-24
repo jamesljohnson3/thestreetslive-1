@@ -61,9 +61,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     (img) => img.id === Number(photoId)
   );
 
-  if (currentPhoto) {
-    currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto);
-  } else {
+  if (!currentPhoto) {
     // Handle the case where the specified photoId is not found
     console.error(`Photo with ID ${photoId} not found`);
     return {
@@ -71,12 +69,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
   }
 
+  currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto);
+
   return {
     props: {
       currentPhoto,
     },
   };
 };
+
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
