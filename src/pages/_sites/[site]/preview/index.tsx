@@ -37,7 +37,7 @@ const PhotoPreviewPage: NextPage = () => {
                         <section className="shadow-lg">
 
                             <div>
-                                <Image
+                                <img
                                     src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${id}`}
                                     className="pointer-events-none h-full w-full"
 
