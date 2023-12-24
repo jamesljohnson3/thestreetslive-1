@@ -3,6 +3,7 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import downloadPhoto from '../utils/downloadPhoto'
 
 const PhotoNotFound: React.FC = () => {
     return (
@@ -64,7 +65,18 @@ const PhotoPreviewPage: NextPage = () => {
                                 <article className="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
                                     <div className="text-center">
                                         content
-
+                                        <button
+                                            onClick={() =>
+                                                downloadPhoto(
+                                                    `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${id}`,
+                                                    `${id}.jpg`
+                                                )
+                                            }
+                                            className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
+                                            title="Download fullsize version"
+                                        >
+                                            <>downloadPhoto</>
+                                        </button>
                                     </div>
                                 </article>
                             </div>
