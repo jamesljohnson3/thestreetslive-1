@@ -23,7 +23,9 @@ const HomePage = ({ data }) => {
             <a href={data.announcement[1]} target="_blank" rel="noopener noreferrer">
                 {data.announcement[1]}
             </a>
-
+            <style jsx>{`
+        ${data.style || ''}
+      `}</style>
             {data.head && <div dangerouslySetInnerHTML={{ __html: data.head }} />}
         </div>
     );
