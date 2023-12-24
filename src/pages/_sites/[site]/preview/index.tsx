@@ -19,9 +19,11 @@ const PhotoDetailPage: NextPage = () => {
                     <Image
                         // Use the appropriate properties to display the larger view of the photo
                         src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/large/${photoId}`}
-                        alt="Larger view of the photo"
-                        width={/* Set the appropriate width */}
-                        height={/* Set the appropriate height */}
+                        className="pointer-events-none h-full w-full"
+                        fill
+                        priority={true}
+                        width={navigation ? 1280 : 1920}
+                        height={navigation ? 853 : 1280}
                     />
                 </div>
             )}
