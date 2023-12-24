@@ -32,7 +32,7 @@ const HomePage = ({ data }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-    const id = 'UCYnA4mBiKyHqIUnOKJKLpJA'; // Replace with the actual channel ID
+    const id = 'UCzF4Ryn8TKn64md77gS5Q5Q'; // Replace with the actual channel ID
     const channelFetchUrl = `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CbrandingSettings%2Cstatistics&id=${id}&key=${process.env.YOUTUBE_API_KEY}`;
     const videoFetchUrl = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&channelId=${id}&maxResults=10&order=date&key=${process.env.YOUTUBE_API_KEY}`;
     const get = async (url: string) => await fetch(url).then((res) => res.json());
