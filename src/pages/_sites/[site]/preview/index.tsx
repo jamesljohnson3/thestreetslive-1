@@ -27,7 +27,7 @@ const PhotoPreviewPage: NextPage = () => {
         <div>
             <Image
                 src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${id}`}
-                className="pointer-events-none h-full w-full"
+                className="pointer-events-none object-contain h-full w-full"
                 sizes="(min-width: 808px) 50vw, 100vw"
                 style={{
                     objectFit: 'cover', // cover, contain, none
