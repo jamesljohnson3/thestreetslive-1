@@ -1,66 +1,12 @@
 // PhotoPreviewPage.tsx
+import cloudinary from '../../../../utils/cloudinary';
+import type { GetStaticProps, NextPage } from 'next';
+import { ImageProps } from '../../../../utils/types'; // Import the type definition
 
-import { NextPage } from 'next';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import Carousel from '../../../../components/Carousel';
-import cloudinary from '../../../../utils/cloudinary'; // Import your Cloudinary instance
-import React from 'react';
-
-const PhotoNotFound: React.FC = () => {
-    return (
-        <div>
-            <h1>Photo Not Found</h1>
-            <p>Sorry, the requested photo could not be found.</p>
-        </div>
-    );
-};
-
-const PhotoPreviewPage: NextPage = () => {
-    const router = useRouter();
-    const { id } = router.query;
-
-    // Use a state to manage the fetched photo data
-    const [currentPhoto, setCurrentPhoto] = React.useState(null);
-    const [loading, setLoading] = React.useState(true);
-
-    React.useEffect(() => {
-        const fetchPhotoData = async () => {
-            try {
-                // Perform a search to get details about the specific image
-                const results = await cloudinary.v2.search
-                    .expression(`public_id:${id}`)
-                    .execute();
-
-                if (results.resources && results.resources.length > 0) {
-                    const resource = results.resources[0];
-                    // Extract the required properties
-                    const { height, width, public_id, format, secure_url } = resource;
-
-                    setCurrentPhoto({ id, height, width, public_id, format, secure_url });
-                } else {
-                    console.error('No resources found for the given ID');
-                }
-            } catch (error) {
-                console.error('Error fetching photo data:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        if (id) {
-            fetchPhotoData();
-        }
-    }, [id]);
-
+const PhotoPreviewPage: NextPage<{ currentPhoto?: ImageProps }> = ({ currentPhoto }) => {
     // Render loading state
-    if (loading) {
+    if (!currentPhoto) {
         return <p>Loading...</p>;
-    }
-
-    // Check if id exists
-    if (!id || !currentPhoto) {
-        return <PhotoNotFound />;
     }
 
     // Render the larger view of the photo
@@ -79,6 +25,45 @@ const PhotoPreviewPage: NextPage = () => {
             <Carousel index={0} currentPhoto={currentPhoto} />
         </div>
     );
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+    const { id } = params;
+
+    // Use Cloudinary API to fetch details about the image
+    try {
+        const response = await cloudinary.v2.api.resource(id, { type: 'upload' });
+
+        // Ensure the necessary properties are present in the Cloudinary API response
+        if (response.secure_url && response.format && response.height && response.width && response.public_id) {
+            const currentPhoto: ImageProps = {
+                id,
+                secure_url: response.secure_url,
+                format: response.format,
+                height: response.height,
+                width: response.width,
+                public_id: response.public_id,
+                blurDataUrl: response.blurDataUrl, // Assuming blurDataUrl is provided by Cloudinary
+            };
+
+            return {
+                props: {
+                    currentPhoto,
+                },
+                revalidate: 60, // In seconds, controls the maximum time between revalidations
+            };
+        } else {
+            console.error('Incomplete response from Cloudinary API:', response);
+            return {
+                notFound: true, // If the resource is not found, return a 404 page
+            };
+        }
+    } catch (error) {
+        console.error('Error fetching photo data:', error);
+        return {
+            notFound: true, // If the resource is not found, return a 404 page
+        };
+    }
 };
 
 export default PhotoPreviewPage;
