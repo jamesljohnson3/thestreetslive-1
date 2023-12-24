@@ -2,14 +2,14 @@
 import type { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Carousel from '../../../../components/Carousel';
-import getResults from '../../../../utils/cachedImages';
-import cloudinary from '../../../../utils/cloudinary';
-import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
-import type { ImageProps } from '../../../../utils/types';
+import Carousel from '../../../../../components/Carousel';
+import getResults from '../../../../../utils/cachedImages';
+import cloudinary from '../../../../../utils/cloudinary';
+import getBase64ImageUrl from '../../../../../utils/generateBlurPlaceholder';
+import type { ImageProps } from '../../../../../utils/types';
 
 // Add your Prisma imports here
-import { getSiteWorkspace, getWorkspacePaths } from '../../../../../prisma/services/workspace';
+import { getSiteWorkspace, getWorkspacePaths } from '../../../../../../prisma/services/workspace';
 
 const PhotoNotFound: React.FC = () => {
   return (
@@ -20,18 +20,20 @@ const PhotoNotFound: React.FC = () => {
   );
 };
 
-const Home: NextPage = ({ currentPhoto, error }: { currentPhoto: ImageProps; error?: { message: string } }) => {
+const Home: NextPage = ({ currentPhoto, allPhotos }: { currentPhoto: ImageProps; allPhotos: ImageProps[] }) => {
   const router = useRouter();
   const { photoId } = router.query;
   let index = Number(photoId);
 
-  if (error) {
-    return <PhotoNotFound />;
-  }
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
+  const filteredPhotos = allPhotos.filter(photo =>
+    photo.public_id.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Check if currentPhoto is truthy before accessing its properties
   if (!currentPhoto || !currentPhoto.public_id || !currentPhoto.format || !currentPhoto.blurDataUrl) {
-    console.error("Invalid currentPhoto object:", currentPhoto);
-    return null;
+    return <PhotoNotFound />;
   }
 
   const currentPhotoUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_2560/${currentPhoto.public_id}.${currentPhoto.format}`;
@@ -44,23 +46,46 @@ const Home: NextPage = ({ currentPhoto, error }: { currentPhoto: ImageProps; err
         <meta name="twitter:image" content={currentPhotoUrl} />
       </Head>
       <main className="mx-auto max-w-[1960px] p-4">
-        <Carousel currentPhoto={currentPhoto} index={index} />
+        <input
+          type="text"
+          placeholder="Search by public_id"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <div>
+          {/* Render your filtered photos */}
+          {filteredPhotos.map(photo => (
+            <div key={photo.id}>
+              <img
+                src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_2560/${photo.public_id}.${photo.format}`}
+                alt={photo.public_id}
+              />
+            </div>
+          ))}
+        </div>
       </main>
     </>
   );
 };
+
+export default Home;
 
 export const getStaticProps: GetStaticProps = async (context) => {
   try {
     const { params } = context;
     const { photoId } = params;
 
-    const results = await getResults();
+    const results = await cloudinary.v2.search
+      .expression(`folder:${siteWorkspace.slug}/*`)
+      .sort_by('public_id', 'desc')
+      .max_results(400)
+      .execute();
 
     let reducedResults: ImageProps[] = [];
     let i = 0;
 
     for (let result of results.resources) {
+      // Check if the required properties exist
       if (result && result.public_id && result.format) {
         const blurDataUrl = await getBase64ImageUrl({
           id: i,
@@ -82,31 +107,28 @@ export const getStaticProps: GetStaticProps = async (context) => {
       }
     }
 
-    const currentPhoto = reducedResults.find((img) => img.id === Number(photoId));
+    const currentPhoto = reducedResults.find(
+      (img) => img.id === Number(photoId)
+    );
 
     if (!currentPhoto) {
+      // Handle the case where the specified photoId is not found
+      console.error(`Photo with ID ${photoId} not found`);
       return {
-        props: {
-          error: {
-            message: `Photo with ID ${photoId} not found`,
-          },
-        },
+        notFound: true,
       };
     }
 
     return {
       props: {
         currentPhoto,
+        allPhotos: reducedResults,
       },
     };
   } catch (error) {
     console.error("Error in getStaticProps:", error);
     return {
-      props: {
-        error: {
-          message: "An error occurred while fetching data.",
-        },
-      },
+      notFound: true,
     };
   }
 };
@@ -117,6 +139,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const siteWorkspace = await getSiteWorkspace(/* add your site parameter here */);
 
     if (!siteWorkspace || !siteWorkspace.slug) {
+      // Handle the case where siteWorkspace is null or undefined
       console.error("Site workspace not found");
       return {
         paths: [],
@@ -147,5 +170,3 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   }
 };
-
-export default Home;
