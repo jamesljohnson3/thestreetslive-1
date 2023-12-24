@@ -33,6 +33,7 @@ const Home: NextPage = ({ currentPhoto }: { currentPhoto: ImageProps }) => {
 
 export default Home;
 
+
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
   const { photoId } = params;
@@ -41,21 +42,34 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   let reducedResults: ImageProps[] = [];
   let i = 0;
+
   for (let result of results.resources) {
-    reducedResults.push({
-      id: i,
-      height: result.height,
-      width: result.width,
-      public_id: result.public_id,
-      format: result.format,
-    });
-    i++;
+    // Check if the required properties exist
+    if (result && result.public_id && result.format) {
+      reducedResults.push({
+        id: i,
+        height: result.height,
+        width: result.width,
+        public_id: result.public_id,
+        format: result.format,
+      });
+      i++;
+    }
   }
 
   const currentPhoto = reducedResults.find(
     (img) => img.id === Number(photoId)
   );
-  currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto);
+
+  if (currentPhoto) {
+    currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto);
+  } else {
+    // Handle the case where the specified photoId is not found
+    console.error(`Photo with ID ${photoId} not found`);
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
@@ -63,6 +77,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     },
   };
 };
+
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getWorkspacePaths();
