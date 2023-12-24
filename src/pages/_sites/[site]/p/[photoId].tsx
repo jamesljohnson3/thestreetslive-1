@@ -67,6 +67,16 @@ export const getStaticProps: GetStaticProps = async (context) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getWorkspacePaths();
   const siteWorkspace = await getSiteWorkspace(/* add your site parameter here */);
+
+  if (!siteWorkspace || !siteWorkspace.slug) {
+    // Handle the case where siteWorkspace is null or undefined
+    console.error("Site workspace not found");
+    return {
+      paths: [],
+      fallback: true,
+    };
+  }
+
   const results = await cloudinary.v2.search
     .expression(`folder:${siteWorkspace.slug}/*`)
     .sort_by('public_id', 'desc')
