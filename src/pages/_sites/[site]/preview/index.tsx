@@ -21,9 +21,8 @@ const PhotoDetailPage: NextPage = () => {
                         src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/large/${photoId}`}
                         className="pointer-events-none h-full w-full"
                         fill
-                        priority={true}
-                        width={navigation ? 1280 : 1920}
-                        height={navigation ? 853 : 1280}
+                        width="100%"
+                        height="100%"
                     />
                 </div>
             )}
