@@ -4,6 +4,7 @@ import { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Carousel from '../../../../components/Carousel';
+import cloudinary from '../../../../utils/cloudinary'; // Import your Cloudinary instance
 import React from 'react';
 
 const PhotoNotFound: React.FC = () => {
@@ -23,19 +24,20 @@ const PhotoPreviewPage: NextPage = () => {
     const [currentPhoto, setCurrentPhoto] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
 
-    // Fetch photo data when the component mounts
     React.useEffect(() => {
         const fetchPhotoData = async () => {
             try {
-                const response = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/resources/${id}`);
-                const data = await response.json();
+                // Perform a search to get details about the specific image
+                const results = await cloudinary.v2.search
+                    .expression(`public_id:${id}`)
+                    .execute();
 
-                if (data.resources && data.resources.length > 0) {
-                    const resource = data.resources[0];
+                if (results.resources && results.resources.length > 0) {
+                    const resource = results.resources[0];
                     // Extract the required properties
-                    const { height, width, public_id, format } = resource;
+                    const { height, width, public_id, format, secure_url } = resource;
 
-                    setCurrentPhoto({ id, height, width, public_id, format, blurDataUrl: resource.secure_url });
+                    setCurrentPhoto({ id, height, width, public_id, format, secure_url });
                 } else {
                     console.error('No resources found for the given ID');
                 }
