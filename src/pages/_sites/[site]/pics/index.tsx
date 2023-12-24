@@ -88,6 +88,13 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
 
       </Head>
       <main>
+        <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+          <img
+            src="https://res.cloudinary.com/unlimitpotential/image/upload/v1703396793/replicate-prediction-aulhnmbbpq5n63qtru2a3kedmu_orh5x9.png"
+            alt=""
+            className="w-full h-full object-center object-cover"
+          />
+        </div>
         {photoId && (
           <Modal
             images={images}
