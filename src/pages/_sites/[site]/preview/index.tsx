@@ -18,7 +18,7 @@ const PhotoDetailPage: NextPage = () => {
                     {/* Fetch the photo details using photoId and display them */}
                     <Image
                         // Use the appropriate properties to display the larger view of the photo
-                        src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/large/${photoId}`}
+                        src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${photoId}`}
                         className="pointer-events-none h-full w-full"
                         sizes="(min-width: 808px) 50vw, 100vw"
                         style={{
