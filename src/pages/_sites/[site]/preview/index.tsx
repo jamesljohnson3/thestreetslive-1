@@ -30,7 +30,7 @@ const PhotoPreviewPage: NextPage = () => {
                 className="pointer-events-none h-full w-full"
                 sizes="(min-width: 808px) 50vw, 100vw"
                 style={{
-                    objectFit: 'cover', // cover, contain, none
+                    objectFit: 'contain', // cover, contain, none
                 }}
             />
         </div>
