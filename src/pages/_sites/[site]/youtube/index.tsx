@@ -24,7 +24,6 @@ const HomePage = ({ data }) => {
                 {data.announcement[1]}
             </a>
 
-            <style jsx>{data.style}</style>
             {data.head && <div dangerouslySetInnerHTML={{ __html: data.head }} />}
         </div>
     );
