@@ -20,6 +20,7 @@ const filterVideos = (images: ImageProps[] = []) => {
   return images.filter(({ format }) => format === '.mp4');
 };
 
+
 export const getStaticPaths = async () => {
   const paths = await getWorkspacePaths();
   return {
@@ -36,6 +37,7 @@ export const getStaticProps = async ({ params }) => {
     .sort_by('public_id', 'desc')
     .max_results(1000)
     .execute();
+  console.log('Cloudinary Search Results:', results);
 
   let reducedResults: ImageProps[] = [];
 
