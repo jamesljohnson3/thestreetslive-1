@@ -120,26 +120,41 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                   {Array.isArray(images) && images.length > 0 ? (
                     images.map(({ id, public_id, format, blurDataUrl }) => (
-                      <Link
-                        key={id}
-                        href={`/preview?id=${public_id}&assetId=${id}`}  // Set the appropriate path
-                        as={`/preview?id=${public_id}&assetId=${id}`}  // Set the appropriate path
-                        id={`photo-${id}`}
-                        shallow
-                        className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight"
-                      >
-                        <img
-                          alt="Next.js Conf photo"
-                          className="transform  object-cover rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
-
-                          src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
-
-                        />
-                      </Link>
-                    ))
+                      // Conditionally render based on the format
+                      { format === '.mp4' ? (
+                        // Render video component or placeholder for video
+                        <div key={id} className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight">
+                          <video
+                            className="w-full h-full object-cover"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                          >
+                            src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${public_id}.${format}`}
+                          </video>
+                        </div>
+                      ) : (
+                        // Render image component
+                        <Link
+                          key={id}
+                          href={`/preview?id=${public_id}&assetId=${id}`}
+                          as={`/preview?id=${public_id}&assetId=${id}`}
+                          id={`photo-${id}`}
+                          shallow
+                          className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight"
+                        >
+                          <img
+                            alt="Next.js Conf photo"
+                            className="transform  object-cover rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
+                            src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
+                          />
+                        </Link>
+                      )}
+                  ))
                   ) : (
-                    <p>No images available.</p>
-                  )}
+                  <p>No images available.</p>
+          )}
                 </div>
               </div>
               <main>
