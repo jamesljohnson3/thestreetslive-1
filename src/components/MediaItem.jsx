@@ -4,13 +4,13 @@ import React from 'react';
 import Link from 'next/link';
 
 const MediaItem = ({ id, public_id, format, blurDataUrl }) => {
-    const isVideo = format === '.mp4';
+    const isVideo = format === 'mp4';
 
     if (isVideo) {
         return (
             <div className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight">
                 <video
-                    className="w-full h-full object-cover"
+                    className="transform object-cover rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
                     autoPlay
                     loop
                     muted
