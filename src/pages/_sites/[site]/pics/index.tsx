@@ -123,45 +123,38 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                 Cta Banner
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-                  {Array.isArray(images) && images.length > 0 ? (
-                    images.map(({ id, public_id, format, blurDataUrl }) => (
-                      <React.Fragment key={id}>
-                        {format === '.mp4' ? (
-                          <div className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight">
-                            <video
-                              className="w-full h-full object-cover"
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                            >
-                              <source
-                                src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${public_id}.${format}`}
-                                type="video/mp4"
-                              />
-                              Your browser does not support the video tag.
-                            </video>
-                          </div>
-                        ) : (
-                          <Link
-                            href={`/preview?id=${public_id}&assetId=${id}`}
-                            as={`/preview?id=${public_id}&assetId=${id}`}
-                            id={`photo-${id}`}
-                            shallow
-                            className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight"
-                          >
-                            <img
-                              alt="Next.js Conf photo"
-                              className="transform object-cover rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
-                              src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
-                            />
-                          </Link>
-                        )}
-                      </React.Fragment>
-                    ))
+                  {format === '.mp4' ? (
+                    <div key={id} className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight">
+                      <video
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                      >
+                        <source
+                          src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${public_id}.${format}`}
+                          type="video/mp4"
+                        />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
                   ) : (
-                    <p>No images available.</p>
+                    <Link
+                      href={`/preview?id=${public_id}&assetId=${id}`}
+                      as={`/preview?id=${public_id}&assetId=${id}`}
+                      id={`photo-${id}`}
+                      shallow
+                      className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight"
+                    >
+                      <img
+                        alt="Next.js Conf photo"
+                        className="transform object-cover rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
+                        src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
+                      />
+                    </Link>
                   )}
+
                 </div>
               </div>
 
