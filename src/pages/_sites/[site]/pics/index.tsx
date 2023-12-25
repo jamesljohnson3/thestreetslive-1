@@ -5,11 +5,10 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 import Modal from '../../../../components/Modal';
 import cloudinary from '../../../../utils/cloudinary';
 import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
-import Script from 'next/script';
-
 import { getSiteWorkspace, getWorkspacePaths } from '../../../../../prisma/services/workspace';
 import { useLastViewedPhoto } from '../../../../utils/useLastViewedPhoto';
 import type { ImageProps } from '../../../../utils/types';
@@ -79,14 +78,15 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
   }, [photoId, lastViewedPhoto, setLastViewedPhoto]);
 
   return (
-    <>        <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
+    <>
+      <Script src="https://cdn.tailwindcss.com" strategy="beforeInteractive" />
 
       <Head>
         <title>Your Page Title</title>
         <meta property="og:image" content="" />
         <meta name="twitter:image" content="" />
-
       </Head>
+
       <main>
         <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
           <img
@@ -95,6 +95,7 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
             className="w-full h-full object-center object-cover"
           />
         </div>
+
         {photoId && (
           <Modal
             images={images}
@@ -104,21 +105,20 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
           />
         )}
 
-        <div className="flex min-h-full flex-col font-sans text-zinc-900 bg-zinc-50 dark:text-zinc-100 dark:bg-black"><div className="text-center">
-          Header  </div>
+        <div className="flex min-h-full flex-col font-sans text-zinc-900 bg-zinc-50 dark:text-zinc-100 dark:bg-black">
+          <div className="text-center">
+            Header
+          </div>
           <section>
             <div className="max-w-screen-3xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8">
               <section className="shadow-lg">
-
                 Content
-
                 {/* Put the rest of your page here. */}
               </section>
+
               <div className="text-center mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
                 Cta Banner
-
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-
                   {Array.isArray(images) && images.length > 0 ? (
                     images.map(({ id, public_id, format, blurDataUrl }) => (
                       <Link
@@ -138,7 +138,7 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                             muted
                             playsInline
                           >
-                            <source src={cloudinary.url(public_id)} type="video/mp4" />
+                            <source src={cloudinary.v2.url(public_id)} type="video/mp4" />
                           </video>
                         ) : (
                           // Render image
@@ -159,9 +159,9 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                   ) : (
                     <p>No images available.</p>
                   )}
-
                 </div>
               </div>
+
               <main>
                 <div>
                   <article>
@@ -169,9 +169,11 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                   </article>
                 </div>
               </main>
+
               <div>
                 Header
               </div>
+
               <main>
                 <div>
                   <article>
