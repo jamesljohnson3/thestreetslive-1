@@ -86,6 +86,7 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
 
   // Separate videos from images
   const videoList = filterVideos(images);
+  console.log('Video List:', videoList);
 
   return (
     <>
