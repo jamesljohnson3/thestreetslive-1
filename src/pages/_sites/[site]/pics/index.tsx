@@ -161,9 +161,10 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                         </React.Fragment>
                       ))
                     ) : (
-                      <p>{format === '.mp4' ? 'No videos available.' : 'No images available.'}</p>
+                      <p>{images && images.some(img => img.format === '.mp4') ? 'No videos available.' : 'No images available.'}</p>
                     )}
                   </div>
+
 
 
                 </div>
