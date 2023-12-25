@@ -13,13 +13,11 @@ import Script from 'next/script';
 import { getSiteWorkspace, getWorkspacePaths } from '../../../../../prisma/services/workspace';
 import { useLastViewedPhoto } from '../../../../utils/useLastViewedPhoto';
 import type { ImageProps } from '../../../../utils/types';
-import React from 'react';
 
-// Function to filter images and return only videos
-const filterVideos = (images: ImageProps[] = []) => {
-  return images.filter(({ format }) => format === '.mp4');
+// Function to filter videos with the format '.mp4'
+const filterVideos = (resources) => {
+  return resources.filter(resource => resource.format === 'mp4');
 };
-
 
 export const getStaticPaths = async () => {
   const paths = await getWorkspacePaths();
@@ -37,12 +35,16 @@ export const getStaticProps = async ({ params }) => {
     .sort_by('public_id', 'desc')
     .max_results(1000)
     .execute();
+
   console.log('Cloudinary Search Results:', results);
+
+  // Filter for videos with the format '.mp4'
+  const videoResults = filterVideos(results.resources);
 
   let reducedResults: ImageProps[] = [];
 
   let i = 0;
-  for (let result of results.resources) {
+  for (let result of videoResults) {
     reducedResults.push({
       id: i,
       height: result.height,
@@ -53,7 +55,7 @@ export const getStaticProps = async ({ params }) => {
     i++;
   }
 
-  const blurImagePromises = results.resources.map((image: ImageProps) => {
+  const blurImagePromises = videoResults.map((image: ImageProps) => {
     return getBase64ImageUrl(image);
   });
 
@@ -85,10 +87,6 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
       setLastViewedPhoto(null);
     }
   }, [photoId, lastViewedPhoto, setLastViewedPhoto]);
-
-  // Separate videos from images
-  const videoList = filterVideos(images);
-  console.log('Video List:', videoList);
 
   return (
     <>
