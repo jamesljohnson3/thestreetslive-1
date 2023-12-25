@@ -118,35 +118,48 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                 Cta Banner
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+
                   {Array.isArray(images) && images.length > 0 ? (
                     images.map(({ id, public_id, format, blurDataUrl }) => (
                       <Link
                         key={id}
-                        href={`/preview?id=${public_id}&assetId=${id}`}  // Set the appropriate path
-                        as={`/preview?id=${public_id}&assetId=${id}`}  // Set the appropriate path
+                        href={`/preview?id=${public_id}&assetId=${id}`}
+                        as={`/preview?id=${public_id}&assetId=${id}`}
                         id={`photo-${id}`}
                         shallow
-                        className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight"
+                        className="group relative cursor-zoom-in overflow-hidden rounded-lg shadow-highlight"
                       >
-                        <Image
-                          alt="Next.js Conf photo"
-                          className="transform  object-cover rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
-                          style={{ transform: 'translate3d(0, 0, 0)' }}
-                          placeholder="blur"
-                          blurDataURL={blurDataUrl}
-                          src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
-                          width={720}
-                          height={720}
-                          sizes="(max-width: 640px) 100vw,
-                            (max-width: 1280px) 50vw,
-                            (max-width: 1536px) 33vw,
-                            25vw"
-                        />
+                        {public_id.endsWith('.mp4') ? (
+                          // Render video
+                          <video
+                            className="w-full h-full object-cover"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                          >
+                            <source src={cloudinary.url(public_id)} type="video/mp4" />
+                          </video>
+                        ) : (
+                          // Render image
+                          <Image
+                            alt="Next.js Conf photo"
+                            className="transform object-cover rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
+                            style={{ transform: 'translate3d(0, 0, 0)' }}
+                            placeholder="blur"
+                            blurDataURL={blurDataUrl}
+                            src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
+                            width={720}
+                            height={720}
+                            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
+                          />
+                        )}
                       </Link>
                     ))
                   ) : (
                     <p>No images available.</p>
                   )}
+
                 </div>
               </div>
               <main>
