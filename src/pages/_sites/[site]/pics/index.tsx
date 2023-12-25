@@ -1,23 +1,13 @@
-// Import necessary modules...
 import { useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
+import Script from 'next/script';
 import { useRouter } from 'next/router';
 import Modal from '../../../../components/Modal';
-import cloudinary from '../../../../utils/cloudinary';
-import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
-import Script from 'next/script';
-
 import { getSiteWorkspace, getWorkspacePaths } from '../../../../../prisma/services/workspace';
 import { useLastViewedPhoto } from '../../../../utils/useLastViewedPhoto';
+import MediaItem from '../../../../components/MediaItem'; // Import your MediaItem component
 import type { ImageProps } from '../../../../utils/types';
-
-// Function to filter videos with the format '.mp4'
-const filterVideos = (resources) => {
-  return resources.filter(resource => resource.format === 'mp4');
-};
 
 export const getStaticPaths = async () => {
   const paths = await getWorkspacePaths();
@@ -38,13 +28,10 @@ export const getStaticProps = async ({ params }) => {
 
   console.log('Cloudinary Search Results:', results);
 
-  // Filter for videos with the format '.mp4'
-  const videoResults = filterVideos(results.resources);
-
   let reducedResults: ImageProps[] = [];
 
   let i = 0;
-  for (let result of videoResults) {
+  for (let result of results.resources) {
     reducedResults.push({
       id: i,
       height: result.height,
@@ -55,7 +42,7 @@ export const getStaticProps = async ({ params }) => {
     i++;
   }
 
-  const blurImagePromises = videoResults.map((image: ImageProps) => {
+  const blurImagePromises = results.resources.map((image: ImageProps) => {
     return getBase64ImageUrl(image);
   });
 
@@ -94,8 +81,8 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
 
       <Head>
         <title>Your Page Title</title>
-        <meta property="og:image" content="" />
-        <meta name="twitter:image" content="" />
+        <meta property="og:image" content="your_image_url_here" />
+        <meta name="twitter:image" content="your_image_url_here" />
       </Head>
 
       <main>
@@ -117,82 +104,25 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
         )}
 
         <div className="flex min-h-full flex-col font-sans text-zinc-900 bg-zinc-50 dark:text-zinc-100 dark:bg-black">
-          <div className="text-center">
-            Header
-          </div>
+          <div className="text-center">Header</div>
 
           <section>
             <div className="max-w-screen-3xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8">
               <section className="shadow-lg">
-                Content
-                {/* Put the rest of your page here. */}
-              </section>
-
-              <div className="text-center mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
-                Cta Banner
-
+                {/* Content */}
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-                  {Array.isArray(images) && images.length > 0 ? (
-                    images.map(({ id, public_id, format, blurDataUrl }) => (
-                      <React.Fragment key={id}>
-                        {format === '.mp4' ? (
-                          <div key={id} className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight">
-                            <video
-                              className="w-full h-full object-cover"
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                            >
-                              <source
-                                src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload/${public_id}.mp4`}
-                                type="video/mp4"
-                              />
-                              Your browser does not support the video tag.
-                            </video>
-                          </div>
-                        ) : (
-                          <Link
-                            href={`/preview?id=${public_id}&assetId=${id}`}
-                            as={`/preview?id=${public_id}&assetId=${id}`}
-                            id={`photo-${id}`}
-                            shallow
-                            className="group relative cursor-zoom-in absolute inset-0 rounded-lg shadow-highlight"
-                          >
-                            <img
-                              alt="Next.js Conf photo"
-                              className="transform object-cover rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110"
-                              src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
-                            />
-                          </Link>
-                        )}
-                      </React.Fragment>
-                    ))
-                  ) : (
-                    <p>{videoList.length > 0 ? 'No images available.' : 'No videos available.'}</p>
-                  )}
+                  {images.map(({ id, public_id, format, blurDataUrl }) => (
+                    <MediaItem
+                      key={id}
+                      id={id}
+                      public_id={public_id}
+                      format={format}
+                      blurDataUrl={blurDataUrl}
+                    />
+                  ))}
                 </div>
-              </div>
-
-              <main>
-                <div>
-                  <article>
-                    <div>Content</div>
-                  </article>
-                </div>
-              </main>
-
-              <div>
-                Header
-              </div>
-
-              <main>
-                <div>
-                  <article>
-                    <div>Content</div>
-                  </article>
-                </div>
-              </main>
+                {/* Put the rest of your page content here. */}
+              </section>
             </div>
           </section>
         </div>
