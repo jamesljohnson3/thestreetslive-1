@@ -16,7 +16,7 @@ import type { ImageProps } from '../../../../utils/types';
 import React from 'react';
 
 // Function to filter images and return only videos
-const filterVideos = (images: ImageProps[]) => {
+const filterVideos = (images: ImageProps[] = []) => {
   return images.filter(({ format }) => format === '.mp4');
 };
 
@@ -131,7 +131,7 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                 Cta Banner
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-                  {images.length > 0 ? (
+                  {Array.isArray(images) && images.length > 0 ? (
                     images.map(({ id, public_id, format, blurDataUrl }) => (
                       <React.Fragment key={id}>
                         {format === '.mp4' ? (
@@ -168,7 +168,7 @@ const DynamicPage: NextPage = ({ images }: { images: ImageProps[] }) => {
                       </React.Fragment>
                     ))
                   ) : (
-                    <p>No images available.</p>
+                    <p>{videoList.length > 0 ? 'No images available.' : 'No videos available.'}</p>
                   )}
                 </div>
               </div>
