@@ -8,6 +8,9 @@ import { getSiteWorkspace, getWorkspacePaths } from '../../../../../prisma/servi
 import { useLastViewedPhoto } from '../../../../utils/useLastViewedPhoto';
 import MediaItem from '../../../../components/MediaItem'; // Import your MediaItem component
 import type { ImageProps } from '../../../../utils/types';
+import cloudinary from '../../../../utils/cloudinary';
+import getBase64ImageUrl from '../../../../utils/generateBlurPlaceholder';
+
 
 export const getStaticPaths = async () => {
   const paths = await getWorkspacePaths();
