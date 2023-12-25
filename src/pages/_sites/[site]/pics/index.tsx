@@ -13,6 +13,7 @@ import Script from 'next/script';
 import { getSiteWorkspace, getWorkspacePaths } from '../../../../../prisma/services/workspace';
 import { useLastViewedPhoto } from '../../../../utils/useLastViewedPhoto';
 import type { ImageProps } from '../../../../utils/types';
+import React from 'react';
 
 // Function to filter images and return only videos
 const filterVideos = (images: ImageProps[]) => {
