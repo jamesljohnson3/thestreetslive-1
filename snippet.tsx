@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
@@ -226,38 +228,62 @@ export default function Component({ driverId }: TrackingDriversPageProps) {
       directionsRef.current.setDestination(destination)
     }
   }, [])
-
-  const startNavigation = useCallback(() => {
-    if (!map.current || !directionsRef.current || !userLocation || !selectedDestination) return
-    setIsNavigating(true)
-    setIsCloseUpView(true)
-    setIsTracking(true)
+  const startNavigation = () => {
+    if (!map.current || !directionsRef.current || !userLocation || !selectedDestination) return;
+    setIsNavigating(true);
+    setIsCloseUpView(true);
+    setIsTracking(!isTracking)
     setIsLocked(true)
     setShowOverview(false)
-    setIsOnline(true)
-    
-    if (map.current) {
+    // Get the current route
+    const origin = directionsRef.current.getOrigin();
+    const destination = directionsRef.current.getDestination();
+    if (origin && destination) {
+      // Ensure the map centers on the user's location with a fixed zoom level and pitch for navigation
       map.current.easeTo({
         center: userLocation,
-        zoom: 18,
-        pitch: 60,
-        bearing: 0,
-        duration: 1000,
-      })
+        zoom: 18, // Lock zoom to 18 during navigation
+        pitch: 60, // Lock pitch to 60 degrees during navigation
+        bearing: map.current.getBearing(),
+        duration: 1000, // Optional: Make the transition smoother
+      }, { animate: false }); // Prevent further animations
+  
+      // Update route information
+      const routeData = directionsRef.current.getWaypoints();
+      if (routeData && routeData.length >= 2) {
+        const leg = routeData[0];
+        setRoute({
+          duration: leg.duration / 60, // Convert to minutes
+          distance: leg.distance * 0.000621371, // Convert to miles
+          currentRoad: leg.name || 'Unknown Road',
+          nextExit: routeData[1]?.name || 'No exit',
+        });
+      }
+  
+    // Start tracking GPS location
+if ('geolocation' in navigator) {
+  watchPositionId.current = navigator.geolocation.watchPosition(
+    async (position) => {
+      const { latitude, longitude } = position.coords;
+      console.log(`Client: GPS position - Latitude: ${latitude}, Longitude: ${longitude}`);
+      updateUserLocation(position);
+      // Update the map view without changing the zoom
+      if (map.current) {  // Add this null check
+        map.current.easeTo({
+          center: [longitude, latitude],
+          zoom: 18, // Keep the zoom level constant
+          pitch: 60,
+          bearing: map.current.getBearing(),
+          duration: 1000,
+        }, { animate: false });
+      }
+    },
+    (error) => console.error('Error watching position:', error),
+    { enableHighAccuracy: true }
+        );
+      }
     }
-
-    if ('geolocation' in navigator) {
-      watchPositionId.current = navigator.geolocation.watchPosition(
-        (position) => {
-          updateUserLocation(position)
-        },
-        (error) => console.error('Error watching position:', error),
-        { enableHighAccuracy: true }
-      )
-    }
-
-    calculateRoute(userLocation, selectedDestination)
-  }, [map, directionsRef, userLocation, selectedDestination, updateUserLocation, calculateRoute])
+  };
 
   const endNavigation = useCallback(() => {
     setIsNavigating(false)
